@@ -1,0 +1,20 @@
+.secondContainer {
+    max-width: 848px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.aboutMainSection {
+    background-image: url('../../assets/images/devonlar_background.jpg');
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.aboutMainSectionText {
+    padding-top: 56px;
+    font-size: 20px;
+    line-height: 32px;
+    color: #6B6B6B;
+}

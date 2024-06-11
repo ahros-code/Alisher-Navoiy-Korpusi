@@ -1,0 +1,41 @@
+.korpusCardWrapper {
+    padding: 16px 16px 16px 18px;
+    background-color: #E0FFFF;
+    max-width: 292px;
+    min-height: 138px;
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.korpusCardTitleText {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.korpurCardTitleSection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.korpusCardDescriptionSection {
+    max-width: 246px;
+}
+
+.korpusCardDescription {
+    max-height: 72px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #98A2B3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+@media only screen and (max-width: 660px) {
+    .korpusCardWrapper {
+        width: 100%;
+    }
+}

@@ -1,0 +1,59 @@
+.janrlarWrapper {
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px 0 #001D3012;
+    min-height: 700px;
+}
+
+.janrlarNameList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.janrlarTitle {
+    text-align: center;
+    color: #1c1c1c;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 16px;
+}
+
+.janrlarItemsCount {
+    padding: 4px 8px;
+}
+
+.janrlarNameItem {
+    width: 242px;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 50px;
+}
+
+.janrlarNameItemText {
+    /*margin-right: 87px;*/
+    color: #1c1c1c;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.janrlarNameItemLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.janrlarItemsCount {
+    padding: 4px 8px;
+    color: #25C374;
+    border-radius: 50px;
+    background-color: #DDF6F3;
+}
+
+.active {
+    background-color: #F0F9FF;
+}

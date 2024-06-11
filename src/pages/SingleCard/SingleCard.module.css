@@ -1,0 +1,112 @@
+.singleCardWrapper {
+    padding-top: 128px;
+    background-image: url('../../assets/images/devonlar_background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 40px;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-between;*/
+    gap: 4px;
+    border-radius: 100px;
+    background-color: #fff;
+    width: 100px;
+    height: 40px;
+    padding-left: 12px;
+    /*padding: 12px 4px;*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #111111;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1280px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+
+.main {
+    max-width: 800px;
+    background-color: white;
+    padding-top: 24px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 16px;
+    padding-bottom: 60px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.singleCardTitle {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 48px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.singleCardDescription {
+    color: #6B6B6B;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+.secondTitle {
+    display: none;
+}
+
+.responsiveSection {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+    .singleCardDescription {
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .singleCardTitle {
+        display: none;
+    }
+    .secondTitle {
+        display: block;
+        text-align: center;
+        margin-bottom: 12px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 32px;
+    }
+    .main {
+        width: 100%;
+    }
+    .backButton {
+        display: none;
+    }
+    .secondBtn {
+        border: none;
+        background-color: transparent;
+    }
+    .responsiveSection {
+        display: flex;
+    }
+    .responsiveSection {
+        display: flex;
+        align-items: center;
+    }
+
+    .secondBackBtn {
+        flex: 0 0 auto;
+        margin-left: 10%;
+    }
+
+    .secondTitle {
+        flex: 1;
+        text-align: center;
+        margin-right: 20%;
+    }
+
+}

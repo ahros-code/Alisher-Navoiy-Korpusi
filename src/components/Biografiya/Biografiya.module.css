@@ -1,0 +1,131 @@
+.biografiyaTitleSection {
+    margin-bottom: 24px;
+}
+
+.biografiyaTitle {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 48px;
+}
+
+.biografiyaCardSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 24px;
+    background-color: #fff;    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    position: relative;
+}
+
+.biografiyaCardTextSectionTitle {
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 48px;
+}
+
+.biografiyaCardTextSection {
+    width: 60%;
+}
+
+.biografiyaCardTextSectionDescription {
+    /*max-height: 192px;*/
+    font-size: 16px;
+    line-height: 24px;
+    color: #6B6B6B;
+}
+
+.biografiyaSectionWrapper {
+    padding-bottom: 140px;
+}
+
+.biografiyaCardSectionImage {
+    padding-right: 24px;
+    width: 37%;
+}
+
+.biografiyaCardTextSection {
+    position: relative;
+}
+
+.readMoreBtn {
+    position: absolute;
+    right: 0;
+    padding-top: 30px;
+    bottom: 10;
+}
+
+.readMoreBtn > * {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #007BFF;
+}
+
+@media only screen and (max-width: 1164px) {
+    .readMoreBtn {
+        padding-top: 0;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .biografiyaCardTextSectionDescription {
+        /*max-height: 192px;*/
+        font-size: 14px;
+        line-height: 24px;
+        color: #6B6B6B;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .biografiyaCardTextSectionDescription {
+        /*max-height: 192px;*/
+        font-size: 14px;
+        line-height: 24px;
+        color: #6B6B6B;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .biografiyaCardSection {
+        flex-direction: column;
+    }
+    .biografiyaCardSectionImage {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .biografiyaCardTextSection {
+        width: 100%;
+        padding-bottom: 25px;
+    }
+    .biografiyaCardTextSectionDescription {
+        font-size: 16px;
+    }
+    .readMoreBtn {
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+    .biografiyaCardTextSectionDescription {
+        overflow: visible;
+    }
+}
+
+@media only screen and (max-width: 424px) {
+    .biografiyaTitle {
+        padding-left: 10px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 374px) {
+    .biografiyaCardSectionImage {
+        width: 100%;
+    }
+}

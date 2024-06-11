@@ -1,0 +1,41 @@
+.secondHeroWrapper {
+    background-image: url('../../assets/images/secondHero.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.secondHeroText {
+    padding-top: 550px;
+    padding-bottom: 100px;
+}
+
+.secondContainer {
+    max-width: 667px;
+    margin: 0 auto;
+}
+
+.secondHeroTitle {
+    color: #fff;
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.secondHeroDescription {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+/*@media only screen and (max-width: 1000px) {*/
+/*    .secondHeroWrapper {*/
+/*        background-size: contain;*/
+/*        background-repeat: no-repeat;*/
+/*    }*/
+/*    .secondHeroText {*/
+/*        padding-top: 92px;*/
+/*    }*/
+/*}*/

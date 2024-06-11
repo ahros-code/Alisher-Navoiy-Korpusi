@@ -1,0 +1,12 @@
+.devonTarkibiTitle {
+    margin-bottom: 28px;
+}
+
+.devonlarImages {
+    margin-bottom: 32px;
+}
+
+.devonTarkibiDataWrapper {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,22 @@
+.devonlarTarkibiImageWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.devonlarTarkibiImage {
+    display: block;
+}
+
+.numberOverlay {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #98A2B3;
+}

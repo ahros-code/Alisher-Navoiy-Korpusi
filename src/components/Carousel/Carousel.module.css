@@ -1,0 +1,44 @@
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carouselWrapper {
+    display: flex;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.carouselContent {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carouselItem {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    z-index: 1;
+}
+
+.arrowLeft {
+    left: 0;
+}
+
+.arrowRight {
+    right: 0;
+}

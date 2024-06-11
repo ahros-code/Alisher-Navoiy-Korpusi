@@ -1,0 +1,149 @@
+.navWrapper {
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: #fff;
+    padding: 8px 32px;
+    margin-top: 44px;
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.test {
+    position: relative;
+}
+
+.itemsList {
+    display: flex;
+    gap: 16px;
+}
+
+.navInput {
+    flex: 1;
+}
+
+.searchInput {
+    width: 100%;
+}
+
+/*.navLogo {*/
+/*    padding-right: 32px;*/
+/*}*/
+
+/*.navbarItemsList {*/
+/*    padding-left: 32px;*/
+/*}*/
+
+.item > * {
+    font-size: 14px;
+    line-height: 24px;
+    color: #1C1C1C;
+    font-weight: 500;
+}
+
+.navInput {
+    position: relative;
+    display: inline-block;
+}
+
+.navInput img {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}
+
+.searchInput {
+    padding-left: 50px;
+    padding-right: 30px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    font-size: 14px;
+    background-color: #F8F9FC;
+}
+
+.hamburgerMenu {
+    display: none;
+}
+
+.hamburgerMenu2 {
+    position: absolute;
+    margin-top: 40px;
+    margin-left: -40px;
+    display: none;
+}
+
+@media only screen and (max-width: 890px){
+    .navWrapper {
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 812px){
+    .navbarItemsList {
+        display: none;
+    }
+    .navFlag {
+        display: none;
+    }
+    .hamburgerMenu {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 812px) {
+    .navWrapper {
+        display: none;
+    }
+    .hamburgerMenu2 {
+        display: block;
+    }
+}
+
+.drawerHead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.notActiveDrawerItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+}
+
+.activeDrawerItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #F0F9FF;
+    border-radius: 50px;
+}
+
+.drawerItemText {
+    color: #1C1C1C;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.drawerHead{
+    font-size: 16px;
+    line-height: 24px;
+    color: #1C1C1C;
+    font-weight: 500;
+}

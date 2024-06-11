@@ -1,0 +1,78 @@
+.janrDataWrapper {
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 40px 0 #001D3012;
+    width: 460px;
+    min-height: 700px;
+}
+
+.janrDataTitle {
+    text-align: center;
+    color: #1c1c1c;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 16px;
+}
+
+.navInput {
+    position: relative;
+    /*display: flex;*/
+}
+
+.navInput img {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}
+
+.searchInput {
+    flex: 1;
+    padding-left: 50px;
+    padding-right: 30px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    font-size: 14px;
+    background-color: #F8F9FC;
+}
+
+.janrDataItem {
+    display: flex;
+    padding: 8px 12px;
+}
+
+.janrDataList {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.janrDataItemData {
+    max-width: 388px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #1C1C1C;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.janrDataItemNumber {
+    margin-right: 5px;
+    color: #1C1C1C;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.form {
+    display: flex;
+}

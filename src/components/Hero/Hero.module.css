@@ -1,0 +1,28 @@
+.wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+@media only screen and (max-width: 1500px){
+    .wrapper {
+        bottom: 50px;
+        width: 400px;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 1128px){
+    .wrapper {
+        width: 300px;
+        bottom: 130px;
+    }
+}
+
+@media only screen and (max-width: 812px) {
+    .wrapper {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
