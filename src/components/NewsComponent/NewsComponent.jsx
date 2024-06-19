@@ -5,22 +5,26 @@ import {Link} from "react-router-dom";
 import tadqiqotlar from './tadqiqotlar.js';
 import SingleNewsData from "./SingleNewsData/SingleNewsData.jsx";
 import {useState} from "react";
+import useFetch from "../../hooks/useFetch.jsx";
 
 const NewsComponent = () => {
+    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/news')
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!data || !data.devans) {
+        return <div>No data available</div>;
+    }
     const submitHandler = e => {
         e.preventDefault();
     };
     const [searchData, setSearchData] = useState('');
-    const myData = tadqiqotlar
-        .filter(item => {
-            if (!searchData.trim()) {
-                return item;
-            } else if (
-                item.nomi.toLowerCase().includes(searchData.toLowerCase())
-            ) {
-                return item;
-            }
-        }).map(item => (
+    const myData = data.map(item => (
             <SingleNewsData key={item.id} link={item.link} muallifi={item.muallifi} name={item.nomi} sanasi={item.sanasi}/>
         ))
     return (

@@ -61,10 +61,10 @@ const NavbarComponent = () => {
                             </Link>
                         </ListItem>
                         <ListItem>
-                            <Link to={'/ilmiy-tadqiqotlar'} onClick={handleClose}
-                                className={location.pathname === '/ilmiy-tadqiqotlar' ? css.activeDrawerItem : css.notActiveDrawerItem}>
+                            <Link to={'/news'} onClick={handleClose}
+                                className={location.pathname === '/news' ? css.activeDrawerItem : css.notActiveDrawerItem}>
                                 <img src={tarjimaiHol} alt={"sasa"}/>
-                                <div className={css.drawerItemText}>Ilmiy tadqiqotlar</div>
+                                <div className={css.drawerItemText}>Yangiliklar</div>
                             </Link>
                         </ListItem>
                         <ListItem>
@@ -98,9 +98,8 @@ const NavbarComponent = () => {
                         <li className={css.item}><Link to="/asarlar"
                                                        className={location.pathname === '/asarlar' ? css.activeLink : ''}>Asarlar</Link>
                         </li>
-                        <li className={css.item}><Link to="/ilmiy-tadqiqotlar"
-                                                       className={location.pathname === '/news' ? css.activeLink : ''}>Ilmiy
-                            tadqiqotlar</Link>
+                        <li className={css.item}><Link to="/news"
+                                                       className={location.pathname === '/news' ? css.activeLink : ''}>Yangiliklar</Link>
                         </li>
                         <li className={css.item}><Link to="/korpus"
                                                        className={location.pathname === '/korpus' ? css.activeLink : ''}>Korpus

@@ -2,11 +2,12 @@ import css from './SingleCard.module.css';
 import {Link, useNavigate, useParams} from "react-router-dom";
 import korpus_mock_data from "../../components/Korpus/korpus_mock_data.js";
 import arrowLeft from '../../assets/images/arrowLeft.svg'
+import useFetch from "../../hooks/useFetch.jsx";
 
 const SingleCard = () => {
     const {id} = useParams()
-    const card = korpus_mock_data.find(data => data.id == id);
     const navigate = useNavigate()
+    const {data} = useFetch(`http://biryuzikki.uz/api/v1/questions/${id}`)
     return (
         <div className={css.singleCardWrapper}>
             <div className={window.innerWidth >= 500 ? css.container : ''}>
@@ -21,12 +22,12 @@ const SingleCard = () => {
                         </button>
                     </div>
                     <div className={css.secondTitle}>
-                        {card.title}
+                        {data.question}
                     </div>
                 </div>
                 <div className={css.main}>
-                    <h2 className={css.singleCardTitle}>{card.title}</h2>
-                    <p className={css.singleCardDescription}>{card.description}</p>
+                    <h2 className={css.singleCardTitle}>{data.question}</h2>
+                    <p className={css.singleCardDescription} dangerouslySetInnerHTML={{__html: data.answer}} />
                 </div>
 
             </div>

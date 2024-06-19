@@ -8,7 +8,7 @@ import {useState} from "react";
 const JanrData = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search)
-    const queryValue = query.get("janr")
+    const queryValue = 'query.get("janr")'
     const submitHandler = e => {
         e.preventDefault();
     };

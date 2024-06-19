@@ -14,7 +14,7 @@ function App() {
                 <Route path={'/'} element={<Home />} />
                 <Route path={'/about'} element={<About />} />
                 <Route path={'/korpus'} element={<KorpusHaqida />} />
-                <Route path={'/ilmiy-tadqiqotlar'} element={<News />} />
+                <Route path={'/news'} element={<News />} />
                 <Route path={'/cards/:id'} element={<SingleCard />} />
                 <Route path={'/devonlar'} element={<Devonlar />} />
             </Route>

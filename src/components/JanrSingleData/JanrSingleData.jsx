@@ -12,8 +12,8 @@ import { Button } from '@mui/base/Button';
 const JanrSingleData = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search)
-  const janr = query.get("janr");
-  const id = query.get("id");
+  const janr = 'query.get("janr");'
+  const id =' query.get("id");'
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);

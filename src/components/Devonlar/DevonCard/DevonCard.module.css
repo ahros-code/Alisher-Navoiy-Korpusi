@@ -2,6 +2,7 @@
     border-radius: 16px;
     background-color: white;
     max-width: 292px;
+    height: 328px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -15,6 +16,15 @@
     line-height: 24px;
     font-weight: 600;
     margin-bottom: 10px;
+    text-align: start;
+}
+
+.imageWrapper > img {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    width: 100%;
+    background-color: lightgray;
+    height: 168px;
 }
 
 .devonCardDescription {
@@ -24,14 +34,20 @@
     color: #0B4A6F99;
     opacity: 70%;
     max-width: 220px;
-    max-height: 48px;
+    margin-bottom: 14px;
+    height: 48px;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 16px;
+    /*margin-bottom: 16px;*/
+    text-align: start;
 }
 
 .devonCardButton {
-    display: block;
+    max-width: 220px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 10px 4px 10px 4px;
     background-color: #F0F9FF;
