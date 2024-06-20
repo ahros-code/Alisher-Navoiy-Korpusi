@@ -2,19 +2,17 @@ import styles from './JanrSingleData.module.css';
 import {useLocation} from "react-router-dom";
 import data from '../JANRLAR_MOCK_DATA/data.js'
 import {capitalize, Modal} from "@mui/material";
-import {forwardRef, useState} from "react";
+import {forwardRef, useContext, useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import Fade from '@mui/material/Fade';
 import { Button } from '@mui/base/Button';
+import {JanrContext} from "../../context/JanrContext.jsx";
+import useFetch from "../../hooks/useFetch.jsx";
+import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 
 const JanrSingleData = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search)
-  const janr = 'query.get("janr");'
-  const id =' query.get("id");'
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -141,13 +139,30 @@ const JanrSingleData = () => {
     }
   `,
     );
+    const {secondarySelectedGenre, setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
+    const {data, isLoading, error} = useFetch(`http://biryuzikki.uz/api/v1/genres/${secondarySelectedGenre.id}/`)
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!data || !data.lines) {
+        return <div>No data available</div>;
+    }
   return (
       <div className={styles.janrSingleDataWrapper}>
           <h3 className={styles.janrSingleDataTitle}>
-              {`${id} - ${capitalize(janr.replace("lar", ""))}`}
+              {`${data.number} - ${data.genre_name}`}
           </h3>
           <p className={styles.janrSingleDataText}>
-              {data.filter(item => item.id == id).map(singleData => (singleData.data))}
+              {data.lines.map(item => (
+                  <>
+                      {item.text} <br />
+                  </>
+              ))}
           </p>
           <div className={styles.batafsilBtn}>
               <TriggerButton onClick={handleOpen}>Open modal</TriggerButton>

@@ -6,10 +6,11 @@ import data from '../JANRLAR_MOCK_DATA/data.js';
 import { useContext, useEffect, useState } from "react";
 import { JanrContext } from "../../context/JanrContext.jsx";
 import useFetch from "../../hooks/useFetch.jsx";
+import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 
 const JanrData = () => {
     const { selectedGenre, setSelectedGenre } = useContext(JanrContext);
-    const [responseData, setResponseData] = useState(null);
+    const [responseData, setResponseData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -46,6 +47,8 @@ const JanrData = () => {
     //     return <div>No data available</div>;
     // }
 
+    const {setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
+
     return (
         <div className={css.janrDataWrapper}>
             <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
@@ -59,7 +62,7 @@ const JanrData = () => {
             </div>
             <ul className={css.janrDataList}>
                 {responseData.length !== 0 ? responseData.map((item, index) => (
-                    <li className={css.janrDataItem} key={index}>
+                    <li className={css.janrDataItem} key={index} onClick={() => setSecondarySelectedGenre(item)}>
                         <p className={css.janrDataItemNumber}>{item.number}. </p>
                         <p className={css.janrDataItemData}>{item.text}</p>
                     </li>
