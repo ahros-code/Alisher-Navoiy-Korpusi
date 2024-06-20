@@ -10,3 +10,45 @@
     display: flex;
     justify-content: space-between;
 }
+
+.devonTarkibi {
+    position: relative;
+}
+
+.devonTarkibiTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.devonlarImages {
+    margin-bottom: 20px;
+}
+
+.devonTarkibiDataWrapper {
+    margin-top: 20px;
+}
+
+.selectedCardData {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selectedCardItem {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(25% - 20px);
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #000;
+}

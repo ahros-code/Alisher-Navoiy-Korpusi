@@ -6,6 +6,7 @@ import KorpusHaqida from "./pages/KorpusHaqida/KorpusHaqida.jsx";
 import News from "./pages/News/News.jsx";
 import SingleCard from "./pages/SingleCard/SingleCard.jsx";
 import Devonlar from "./pages/Devonlar/Devonlar.jsx";
+import IlmiyTadqiqotlar from "./pages/IlmiyTadqiqotlar/IlmiyTadqiqotlar.jsx";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path={'/news'} element={<News />} />
                 <Route path={'/cards/:id'} element={<SingleCard />} />
                 <Route path={'/devonlar'} element={<Devonlar />} />
+                <Route path={'/ilmiy-tadqiqotlar'} element={<IlmiyTadqiqotlar />} />
             </Route>
         </Routes>
     )

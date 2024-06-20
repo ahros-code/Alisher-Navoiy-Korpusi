@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useContext} from "react";
 import styles from "./Carousel.module.css";
 import arrowLeft from '../../assets/images/arrowRightCarousel.svg';
 import arrowRight from '../../assets/images/arrowLeftCarousel.svg';
 import DevonCard from "../Devonlar/DevonCard/DevonCard.jsx";
 import useFetch from "../../hooks/useFetch.jsx";
+import {DataContext} from "../../context/DataContext.jsx";
 
 const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const itemsPerView = 4;
+
+    const {handleCardClick} = useContext(DataContext);
 
     const handlePrevClick = () => {
         setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -17,7 +20,7 @@ const Carousel = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, (data.devans ? data.devans.length : 0) - itemsPerView));
     };
 
-    const { data, isLoading, error } = useFetch('http://biryuzikki.uz/api/v1/general/');
+    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/general/');
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -39,11 +42,17 @@ const Carousel = () => {
             <div className={styles.carouselWrapper}>
                 <div
                     className={styles.carouselContent}
-                    style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
+                    style={{transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`}}
                 >
                     {data.devans.map((item) => (
                         <div className={styles.carouselItem} key={item.id}>
-                            <DevonCard id={item.id} title={item.name} description={item.desc} image={item.image} />
+                            <DevonCard
+                                id={item.id}
+                                title={item.name}
+                                description={item.desc}
+                                image={item.image}
+                                onClick={() => handleCardClick(item.id)}
+                            />
                         </div>
                     ))}
                 </div>

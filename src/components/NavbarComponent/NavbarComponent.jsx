@@ -93,11 +93,14 @@ const NavbarComponent = () => {
                                                        className={location.pathname === '/about' ? css.activeLink : ''}>Tarjimai
                             hol</Link></li>
                         <li className={css.item}><Link to="/devonlar"
-                                                       className={location.pathname === '/devonlar' ? css.activeLink : ''}>Devonlar</Link>
+                                                       className={location.pathname === '/devonlar' ? css.activeLink : ''}>Devonlari</Link>
                         </li>
                         <li className={css.item}><Link to="/asarlar"
-                                                       className={location.pathname === '/asarlar' ? css.activeLink : ''}>Asarlar</Link>
+                                                       className={location.pathname === '/asarlar' ? css.activeLink : ''}>Asarlari</Link>
                         </li>
+                        <li className={css.item}><Link to="/ilmiy-tadqiqotlar"
+                                                       className={location.pathname === '/ilmiy-tadqiqotlar' ? css.activeLink : ''}>Ilmiy
+                            tadqiqotlar</Link></li>
                         <li className={css.item}><Link to="/news"
                                                        className={location.pathname === '/news' ? css.activeLink : ''}>Yangiliklar</Link>
                         </li>
@@ -111,7 +114,7 @@ const NavbarComponent = () => {
                     <img src={flag} alt="flag icon"/>
                 </div>
                 <div className={css.hamburgerMenu}>
-                    <Hamburger toggled={isOpen} toggle={setOpen} size={24}/>
+                <Hamburger toggled={isOpen} toggle={setOpen} size={24}/>
                 </div>
             </div>
         </div>
