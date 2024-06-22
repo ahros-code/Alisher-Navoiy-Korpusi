@@ -6,9 +6,6 @@ import {useContext} from "react";
 import {JanrContext} from "../../context/JanrContext.jsx";
 
 const DevonlarTarkibiImages = ({name, number}) => {
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const queryValue = query.get("janr");
     const {selectedGenre} = useContext(JanrContext)
   return (
       <div className={css.devonlarTarkibiImageWrapper}>

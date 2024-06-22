@@ -4,7 +4,7 @@ import useFetch from "../../hooks/useFetch.jsx";
 import React from "react";
 
 const About = () => {
-    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/general/biography/');
+    const {data, isLoading, error} = useFetch('https://biryuzikki.uz/api/v1/general/biography/');
     if (isLoading) {
         return <div>Loading...</div>;
     }

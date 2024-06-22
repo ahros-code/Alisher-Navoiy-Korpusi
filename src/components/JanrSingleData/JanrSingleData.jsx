@@ -14,6 +14,8 @@ import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 import arrow from '../../assets/images/arrow-narrow-right-icon.svg'
 
 const JanrSingleData = () => {
+    // const [isHovering, setIsHovering] = useState(false);
+    const [hoveredWord, setHoveredWord] = useState(null);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -174,7 +176,17 @@ const JanrSingleData = () => {
 
     const metadata = Object.entries(myData.metadata);
 
-    // console.log(myData)
+    console.log(myData)
+
+    // const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseEnter = (word) => {
+        setHoveredWord(word);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredWord(null);
+    };
 
     return (
         <div className={styles.janrSingleDataWrapper}>
@@ -184,7 +196,31 @@ const JanrSingleData = () => {
             <p className={styles.janrSingleDataText}>
                 {!isLoading ? myData.lines.map(item => (
                     <>
-                        {item.text} <br/>
+                        {item.text.split(" ").map((word, index) => (
+                            <span key={index} className={styles.text}>
+                    <span
+                        onMouseEnter={() => handleMouseEnter(word)}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {word}
+                    </span>
+                                {hoveredWord === word && (
+                                    <div className={styles.hoverDiv}>
+                                        <span style={{
+                                            fontSize: "12px",
+                                            lineHeight: "24px",
+                                            color: '#6D93A9'
+                                        }}>Semantik izoh:</span>
+                                        <span style={{
+                                            color: '#1C1C1C',
+                                            fontSize: '14px',
+                                            lineHeight: '24px',
+                                            fontWeight: '500'
+                                        }}>{console.log(myData.word_explanations.find(item => item.word.toLowerCase().includes(hoveredWord.toLowerCase())))}</span>
+                                    </div>
+                                )}
+                </span>
+                        ))} <br/>
                     </>
                 )) : <>Loading...</>}
             </p>
@@ -239,4 +275,4 @@ const JanrSingleData = () => {
     )
 }
 
-export default JanrSingleData;
+export default JanrSingleData
