@@ -45,6 +45,16 @@
 .janrDataItem {
     display: flex;
     padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.janrDataItem:hover {
+    background-color: #F5FBFF;
+}
+
+.active {
+    background-color: #F0F9FF;
 }
 
 .janrDataList {

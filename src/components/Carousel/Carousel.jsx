@@ -20,7 +20,7 @@ const Carousel = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, (data.devans ? data.devans.length : 0) - itemsPerView));
     };
 
-    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/general/');
+    const {data, isLoading, error} = useFetch('https://biryuzikki.uz/api/v1/general/');
 
     if (isLoading) {
         return <div>Loading...</div>;

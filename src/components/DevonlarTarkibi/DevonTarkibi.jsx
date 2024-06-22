@@ -13,7 +13,7 @@ import {JanrContext} from "../../context/JanrContext.jsx";
 
 const DevonTarkibi = () => {
     const { selectedCardData, isCardLoading } = useContext(DataContext);
-    const { data, isLoading, error } = useFetch('http://biryuzikki.uz/api/v1/general/');
+    const { data, isLoading, error } = useFetch('https://biryuzikki.uz/api/v1/general/');
 
     if (isLoading) {
         return <div>Loading...</div>;
