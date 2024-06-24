@@ -2,8 +2,9 @@
     border-radius: 16px;
     background-color: white;
     max-width: 292px;
-    height: 328px;
+    height: 358px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .devonCardTextSection {
@@ -43,8 +44,10 @@
 }
 
 .devonCardButton {
-    /*max-width: 220px;*/
-    height: 32px;
+    max-width: 230px;
+    /*height: 32px;*/
+    position: absolute;
+    bottom: 16px;
     display: flex;
     justify-content: center;
     align-items: center;

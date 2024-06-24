@@ -1,19 +1,20 @@
 import css from './JanrData.module.css';
-import {capitalize, Pagination} from "@mui/material";
+import { capitalize, Pagination } from "@mui/material";
 import search from '../../assets/images/search.svg';
 import { useContext, useEffect, useState } from "react";
 import { JanrContext } from "../../context/JanrContext.jsx";
-import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
+import { SecondaryJanrContext } from "../../context/SecondaryJanrContext.jsx";
 
 const JanrData = () => {
     const { selectedGenre } = useContext(JanrContext);
-    const [responseData, setResponseData] = useState('');
+    const [responseData, setResponseData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchData, setSearchData] = useState(0);
-    const [searchedData, setSearchedData] = useState();
-    const {secondarySelectedGenre,setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
-    const [pagesCount, setPagesCount] = useState(Number);
+    const [searchedData, setSearchedData] = useState([]);
+    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
+    const [pagesCount, setPagesCount] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         fetchData();
@@ -28,9 +29,7 @@ const JanrData = () => {
                 `https://biryuzikki.uz/api/v1/general/?genre_id=${selectedGenre.id}`
             );
             const data = await response.json();
-            // console.log(Math.ceil(data.main.count / 10))
-            setPagesCount(Math.ceil(data.main.count / 10))
-            // console.log(pagesCount)
+            setPagesCount(Math.ceil(data.main.count / 10));
             setResponseData(data.main.results);
         } catch (error) {
             setError(error);
@@ -39,29 +38,16 @@ const JanrData = () => {
         setIsLoading(false);
     };
 
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-
-    // if (!responseData || responseData.length === 0) {
-    //     return <div>No data available</div>;
-    // }
-
     const handleInputChange = (event) => {
         setSearchData(event.target.value);
     };
 
     useEffect(() => {
         if (searchData) {
-            // Make your request here
             fetch(`https://biryuzikki.uz/api/v1/general?genre_detail_number=${searchData}`)
                 .then(res => res.json())
                 .then(response => {
-                    setSearchedData(response.main.results)
+                    setSearchedData(response.main.results);
                 })
                 .catch(error => {
                     console.error(error);
@@ -69,13 +55,9 @@ const JanrData = () => {
         }
     }, [searchData]);
 
-
-
-    const [page, setPage] = useState(1);
-
     const handleChange = (event, value) => {
         setPage(value);
-        fetchPageData(value)
+        fetchPageData(value);
     };
 
     const fetchPageData = (pageNumber) => {
@@ -84,19 +66,30 @@ const JanrData = () => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                setResponseData(data.main.results)
+                setResponseData(data.main.results);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
     };
 
+    useEffect(() => {
+        if (responseData.length > 0) {
+            setSecondarySelectedGenre(responseData[0]);
+        } else if(responseData.length <= 0){
+            setSecondarySelectedGenre(null)
+        }
+    }, [responseData]);
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
-        <div className={css.janrDataWrapper} style={{position: 'relative'}}>
+        <div className={css.janrDataWrapper} style={{ position: 'relative' }}>
             <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
             <div className={css.navInput}>
-                <img src={search} alt="search icon"/>
+                <img src={search} alt="search icon" />
                 <input
                     type="text"
                     className={css.searchInput}
@@ -107,8 +100,7 @@ const JanrData = () => {
             </div>
             <ul className={css.janrDataList}>
                 {searchData && searchedData && searchedData.length > 0 ? (
-                    // If searchData is not empty and searchedData has items, render searchedData
-                    searchedData?.map((item, index) => (
+                    searchedData.map((item, index) => (
                         <li
                             className={css.janrDataItem}
                             key={index}
@@ -119,7 +111,6 @@ const JanrData = () => {
                         </li>
                     ))
                 ) : responseData.length > 0 ? (
-                    // If searchData is empty or searchedData is empty, render responseData
                     responseData.map((item, index) => (
                         <li
                             className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
@@ -131,7 +122,6 @@ const JanrData = () => {
                         </li>
                     ))
                 ) : (
-                    // If responseData is empty, show no data and reset secondarySelectedGenre
                     <div>No data available</div>
                 )}
             </ul>

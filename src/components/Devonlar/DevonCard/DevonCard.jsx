@@ -12,9 +12,9 @@ const DevonCard = ({id, image, title, description, onClick}) => {
                     {title}
                 </div>
                 <div className={css.devonCardDescription}>{description}</div>
-                <Link className={css.devonCardButton} to={'https://kun.uz'}>
-                    Batafsil
-                </Link>
+                    <Link className={css.devonCardButton} to={'https://kun.uz'}>
+                        Batafsil
+                    </Link>
             </div>
         </div>
     )

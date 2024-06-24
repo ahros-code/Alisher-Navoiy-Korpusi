@@ -1,0 +1,33 @@
+.wrapper {
+    width: 100%;
+    border-bottom: 1px solid #C7D9E580;
+}
+
+.worksDataItem {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/*.worksDataItem {*/
+/*    padding: 8px;*/
+/*    text-align: left;*/
+/*    vertical-align: middle;*/
+/*    white-space: nowrap;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*}*/
+
+.worksDataItem img {
+    width: 20px;
+    height: 20px;
+}
+
+.title {
+    padding: 8px;
+    text-align: end;
+    max-width: 540px;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

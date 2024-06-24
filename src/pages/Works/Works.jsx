@@ -1,7 +1,7 @@
 import css from './Works.module.css';
-import SingleTadqiqotData from "../../components/IlmiyTadqiqotComponent/SingleTadqiqotData/SingleTadqiqotData.jsx";
 import useFetch from "../../hooks/useFetch.jsx";
 import {useEffect, useState} from "react";
+import SingleWorkComponent from "../../components/SingleWorkComponent/SingleWorkComponent.jsx";
 
 const Works = () => {
     const {data, isLoading, error} = useFetch('https://biryuzikki.uz/api/v1/works/')
@@ -37,34 +37,55 @@ const Works = () => {
         setSearchData(event.target.value);
     };
 
-  return (
-      <div className={css.worksWrapper}>
-          <div className={css.container}>
-              <h2 className={css.worksTitle}>
-                  Asarlar
-              </h2>
-              <div className={css.newsMainSectionWrapper}>
-                  <form className={css.form}>
-                      <input type="text" className={css.searchInput} placeholder="Qidiruv" value={searchData}
-                             onChange={handleInputChange}/>
-                  </form>
-                  {searchData ? (
-                      searchedData?.map(item => (
-                          <div style={{
-                              borderBottom: '1px solid #C7D9E580'
-                          }}><SingleTadqiqotData key={item.id} title={item.title} authors={item.authors}
-                                                 published_at={item.published_at} pdf={item.pdf_file}/></div>
-                      ))
-                  ) : data?.results.map(item => (
-                      <div style={{
-                          borderBottom: '1px solid #C7D9E580'
-                      }}><SingleTadqiqotData key={item.id} title={item.title} authors={item.authors}
-                                             published_at={item.published_at} pdf={item.pdf_file}/></div>
-                  ))}
-              </div>
-          </div>
-      </div>
-  )
+    return (
+        <div className={css.worksWrapper}>
+            <div className={css.container}>
+                <h2 className={css.worksTitle}>
+                    Asarlar
+                </h2>
+                <div className={css.newsMainSectionWrapper}>
+                    <form className={css.form}>
+                        <input type="text" className={css.searchInput} placeholder="Qidiruv" value={searchData}
+                               onChange={handleInputChange}/>
+                    </form>
+                    <table className={css.table}>
+                        <thead>
+                        <tr className={css.headerRow}>
+                            <th className={css.headerItem}>Nomi</th>
+                            <th className={css.headerItem}>Sanasi</th>
+                            <th className={css.headerItem}>Ko'rish</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {searchData ? (
+                            searchedData?.map(item => (
+                                <SingleWorkComponent
+                                    key={item.id}
+                                    title={item.title}
+                                    fromYear={item.from_year}
+                                    toYear={item.to_year}
+                                    pdf={item.pdf_file}
+                                    className={css.bodyRow}
+                                />
+                            ))
+                        ) : (
+                            data?.results.map(item => (
+                                <SingleWorkComponent
+                                    key={item.id}
+                                    title={item.title}
+                                    fromYear={item.from_year}
+                                    toYear={item.to_year}
+                                    pdf={item.pdf_file}
+                                    className={css.bodyRow}
+                                />
+                            ))
+                        )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default Works;

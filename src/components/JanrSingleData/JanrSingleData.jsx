@@ -173,7 +173,6 @@ const JanrSingleData = () => {
             </h3>
             <p className={styles.janrSingleDataText}>
                 {!isLoading ? myData.lines.map((line) => {
-                    // Get word explanations related to this line
                     const wordExplanationsForLine = myData.word_explanations.filter(
                         (we) => we.genre_detail_line.includes(line.id))
                     return (
