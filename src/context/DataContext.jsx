@@ -8,7 +8,7 @@ export const DataProvider = ({ children }) => {
 
     const handleCardClick = (id) => {
         setIsCardLoading(true);  // Set loading state to true
-        fetch(`http://biryuzikki.uz/api/v1/general/?devan_id=${id}`, {
+        fetch(`https://biryuzikki.uz/api/v1/general/?devan_id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +16,6 @@ export const DataProvider = ({ children }) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Card data:', data);
                 setSelectedCardData(data);
                 setIsCardLoading(false);
             })

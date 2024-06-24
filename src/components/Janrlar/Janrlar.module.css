@@ -26,11 +26,16 @@
 }
 
 .janrlarNameItem {
+    cursor: pointer;
     width: 242px;
     display: flex;
     justify-content: space-between;
     padding: 8px 12px;
     border-radius: 50px;
+}
+
+.janrlarNameItem:hover {
+    background-color: #F0F9FFB2;
 }
 
 .janrlarNameItemText {

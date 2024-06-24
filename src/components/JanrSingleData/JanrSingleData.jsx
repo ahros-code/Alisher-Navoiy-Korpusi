@@ -1,26 +1,23 @@
 import styles from './JanrSingleData.module.css';
-import {useLocation} from "react-router-dom";
-import data from '../JANRLAR_MOCK_DATA/data.js'
-import {capitalize, Modal} from "@mui/material";
-import {forwardRef, useContext, useEffect, useState} from "react";
+import { Modal } from "@mui/material";
+import { forwardRef, useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import {styled, css} from '@mui/system';
-import {Modal as BaseModal} from '@mui/base/Modal';
+import { styled, css } from '@mui/system';
+import { Modal as BaseModal } from '@mui/base/Modal';
 import Fade from '@mui/material/Fade';
-import {Button} from '@mui/base/Button';
-import {JanrContext} from "../../context/JanrContext.jsx";
-import useFetch from "../../hooks/useFetch.jsx";
-import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
+import { Button } from '@mui/base/Button';
+import { SecondaryJanrContext } from "../../context/SecondaryJanrContext.jsx";
 import arrow from '../../assets/images/arrow-narrow-right-icon.svg'
+import LineWithHover from "../LineWithHover/LineWithHover.jsx";
 
 const JanrSingleData = () => {
-    // const [isHovering, setIsHovering] = useState(false);
     const [hoveredWord, setHoveredWord] = useState(null);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     const Backdrop = forwardRef((props, ref) => {
-        const {open, ...other} = props;
+        const { open, ...other } = props;
         return (
             <Fade in={open}>
                 <div ref={ref} {...other} />
@@ -80,7 +77,7 @@ const JanrSingleData = () => {
     };
 
     const ModalContent = styled('div')(
-        ({theme}) => css`
+        ({ theme }) => css`
             font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 500;
             text-align: start;
@@ -113,7 +110,7 @@ const JanrSingleData = () => {
     );
 
     const TriggerButton = styled(Button)(
-        ({theme}) => css`
+        ({ theme }) => css`
             font-weight: 400;
             font-size: 14px;
             line-height: 24px;
@@ -141,52 +138,35 @@ const JanrSingleData = () => {
             }
         `,
     );
-    const {secondarySelectedGenre, setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
-    // const {data, isLoading, error} = useFetch(`http://biryuzikki.uz/api/v1/genres/${secondarySelectedGenre.id}/`)
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-    //
-    // if (error) {
-    //     return <div>Error: {error.message}</div>;
-    // }
-    //
-    // if (!data || !data.lines) {
-    //     return <div>No data available</div>;
-    // }
-    const [isLoading, setIsLoading] = useState()
-    const [myData, setMyData] = useState({});
+
+    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [myData, setMyData] = useState(null);
+
     useEffect(() => {
+        if (!secondarySelectedGenre) {
+            setMyData(null);
+            return;
+        }
+
         setIsLoading(true); // Set loading state to true on data fetch start
         fetch(`https://biryuzikki.uz/api/v1/genres/${secondarySelectedGenre.id}`)
             .then(response => response.json())
             .then(data => {
                 setMyData(data);
-                // console.log(data)
-                setIsLoading(false); // Set loading state to false after data fetch completes
+                setIsLoading(false);
             })
             .catch(err => {
                 console.log(err);
-                setIsLoading(false); // Set loading state to false on error
+                setIsLoading(false);
             });
     }, [secondarySelectedGenre]);
-    if (!myData || !myData.lines) {
-        return <div>No data available</div>;
+
+    if (!secondarySelectedGenre || !myData || !myData.lines) {
+        return <div className={styles.janrSingleDataWrapper}>No data available</div>;
     }
 
     const metadata = Object.entries(myData.metadata);
-
-    // console.log(myData)
-
-    // const [isHovering, setIsHovering] = useState(false);
-
-    const handleMouseEnter = (word) => {
-        setHoveredWord(word);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredWord(null);
-    };
 
     return (
         <div className={styles.janrSingleDataWrapper}>
@@ -194,40 +174,23 @@ const JanrSingleData = () => {
                 {`${myData.genre_detail_number} - ${myData.genre_name}`}
             </h3>
             <p className={styles.janrSingleDataText}>
-                {!isLoading ? myData.lines.map(item => (
-                    <>
-                        {item.text.split(" ").map((word, index) => (
-                            <span key={index} className={styles.text}>
-                    <span
-                        onMouseEnter={() => handleMouseEnter(word)}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {word}
-                    </span>
-                                {hoveredWord === word && (
-                                    <div className={styles.hoverDiv}>
-                                        <span style={{
-                                            fontSize: "12px",
-                                            lineHeight: "24px",
-                                            color: '#6D93A9'
-                                        }}>Semantik izoh:</span>
-                                        <span style={{
-                                            color: '#1C1C1C',
-                                            fontSize: '14px',
-                                            lineHeight: '24px',
-                                            fontWeight: '500'
-                                        }}>{console.log()}</span>
-                                    </div>
-                                )}
-                </span>
-                        ))} <br/>
-                    </>
-                )) : <>Loading...</>}
+                {!isLoading ? myData.lines.map((line) => {
+                    // Get word explanations related to this line
+                    const wordExplanationsForLine = myData.word_explanations.filter(
+                        (we) => we.genre_detail_line.includes(line.id))
+                    return (
+                        <LineWithHover
+                            key={line.id}
+                            text={line.text}
+                            wordExplanations={wordExplanationsForLine}
+                        />
+                    )
+                }) : <>Loading...</>}
             </p>
             <div className={styles.botWrapper}>
                 <button className={styles.botBtns}>
                     <div className={styles.leftIcon}>
-                        <img src={arrow} alt={'arrow'}/>
+                        <img src={arrow} alt={'arrow'} />
                     </div>
                 </button>
                 <div className={styles.center}>
@@ -239,7 +202,7 @@ const JanrSingleData = () => {
                             open={open}
                             onClose={handleClose}
                             closeAfterTransition
-                            slots={{backdrop: StyledBackdrop}}
+                            slots={{ backdrop: StyledBackdrop }}
                         >
                             <Fade in={open}>
                                 <ModalContent sx={style} style={{
@@ -267,7 +230,7 @@ const JanrSingleData = () => {
                 </div>
                 <button className={styles.botBtns}>
                     <div className={styles.rightIcon}>
-                        <img src={arrow} alt={'arrow'}/>
+                        <img src={arrow} alt={'arrow'} />
                     </div>
                 </button>
             </div>
@@ -275,4 +238,4 @@ const JanrSingleData = () => {
     )
 }
 
-export default JanrSingleData
+export default JanrSingleData;

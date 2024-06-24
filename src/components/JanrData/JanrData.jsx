@@ -15,7 +15,7 @@ const JanrData = () => {
     const [error, setError] = useState(null);
     const [searchData, setSearchData] = useState(0);
     const [searchedData, setSearchedData] = useState();
-
+    const {secondarySelectedGenre,setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
     const [pagesCount, setPagesCount] = useState(Number);
 
     useEffect(() => {
@@ -41,6 +41,10 @@ const JanrData = () => {
 
         setIsLoading(false);
     };
+
+    if(responseData.length > 0){
+        setSecondarySelectedGenre(responseData[0])
+    }
 
     // if (isLoading) {
     //     return <div>Loading...</div>;
@@ -73,7 +77,6 @@ const JanrData = () => {
     }, [searchData]);
 
 
-    const {secondarySelectedGenre,setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
 
     const [page, setPage] = useState(1);
 
@@ -110,18 +113,32 @@ const JanrData = () => {
                 />
             </div>
             <ul className={css.janrDataList}>
-                {searchData ? searchedData?.map((item, index) => (
-                    <li className={`${css.janrDataItem}`}
-                        key={index} onClick={() => setSecondarySelectedGenre(item)}>
-                        <p className={css.janrDataItemNumber}>{item.number}. </p>
-                        <p className={css.janrDataItemData}>{item.text}</p>
-                    </li>
-                )) : responseData.length !== 0 ? responseData.map((item, index) => (
-                        <li className={`${css.janrDataItem} ${secondarySelectedGenre.id == item.id ? css.active : ''}`} key={index} onClick={() => setSecondarySelectedGenre(item)}>
-                            <p className={css.janrDataItemNumber}>{item.number}. </p>
-                            <p className={css.janrDataItemData}>{item.text}</p>
-                        </li>
-                    )) : <div>No data available</div>}
+                {
+                    searchData ? (
+                        searchData.length > 0 ? (
+                            searchData.map((item, index) => (
+                                <li className={css.janrDataItem}
+                                    key={index} onClick={() => setSecondarySelectedGenre(item)}>
+                                    <p className={css.janrDataItemNumber}>{item.number}. </p>
+                                    <p className={css.janrDataItemData}>{item.text}</p>
+                                </li>
+                            ))
+                        ) : (
+                            <div>No data available</div>
+                        )
+                    ) : responseData.length > 0 ? (
+                        responseData.map((item, index) => (
+                            <li className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
+                                key={index} onClick={() => setSecondarySelectedGenre(item)}>
+                                <p className={css.janrDataItemNumber}>{item.number}. </p>
+                                <p className={css.janrDataItemData}>{item.text}</p>
+                            </li>
+                        ))
+                    ) : (
+                        <div>No data available</div> && setSecondarySelectedGenre(null)
+                    )
+                }
+
             </ul>
             <Pagination
                 count={pagesCount}

@@ -1,6 +1,5 @@
 import css from './Janrlar.module.css';
 import janrNameIcon from '../../assets/images/tarjimaiHol.svg'
-import {Link, useLocation} from "react-router-dom";
 import useFetch from "../../hooks/useFetch.jsx";
 import {useContext} from "react";
 import {JanrContext} from "../../context/JanrContext.jsx";
@@ -37,7 +36,7 @@ const Janrlar = () => {
                 </div>
             </li>
             {data.seconds.map(item => (
-                <li className={`${css.janrlarNameItem} ${selectedGenre.name === item.name ? css.active : ''}`}>
+                <li className={`${css.janrlarNameItem} ${selectedGenre.name === item.name ? css.active : ''}`} onClick={() => setSelectedGenre(item)}>
                     <div className={css.janrlarNameItemLeft}>
                         <img src={janrNameIcon} alt="icon"/>
                         <h4 className={css.janrlarNameItemText}>

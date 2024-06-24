@@ -1,6 +1,8 @@
 .navWrapper {
     border-radius: 100px;
-    position: absolute;
+    max-width: 1240px;
+    z-index: 2;
+    /*position: absolute;*/
     top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -13,6 +15,7 @@
     align-items: center;
     gap: 32px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
 }
 
 .activeLink {
