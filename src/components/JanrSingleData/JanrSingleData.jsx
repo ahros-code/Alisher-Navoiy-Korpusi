@@ -176,7 +176,7 @@ const JanrSingleData = () => {
 
     const metadata = Object.entries(myData.metadata);
 
-    console.log(myData)
+    // console.log(myData)
 
     // const [isHovering, setIsHovering] = useState(false);
 
@@ -191,7 +191,7 @@ const JanrSingleData = () => {
     return (
         <div className={styles.janrSingleDataWrapper}>
             <h3 className={styles.janrSingleDataTitle}>
-                {`${myData.number} - ${myData.genre_name}`}
+                {`${myData.genre_detail_number} - ${myData.genre_name}`}
             </h3>
             <p className={styles.janrSingleDataText}>
                 {!isLoading ? myData.lines.map(item => (
@@ -216,7 +216,7 @@ const JanrSingleData = () => {
                                             fontSize: '14px',
                                             lineHeight: '24px',
                                             fontWeight: '500'
-                                        }}>{console.log(myData.word_explanations.find(item => item.word.toLowerCase().includes(hoveredWord.toLowerCase())))}</span>
+                                        }}>{console.log()}</span>
                                     </div>
                                 )}
                 </span>
