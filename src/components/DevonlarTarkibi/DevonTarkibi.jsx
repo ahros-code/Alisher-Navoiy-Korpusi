@@ -3,7 +3,6 @@ import css from './DevonlarTarkibi.module.css';
 import DevonlarTarkibiImages from "../DevonlarTarkibiImages/DevonlarTarkibiImages.jsx";
 import 'swiper/css';
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Link } from "react-router-dom";
 import Janrlar from "../Janrlar/Janrlar.jsx";
 import JanrData from "../JanrData/JanrData.jsx";
 import JanrSingleData from "../JanrSingleData/JanrSingleData.jsx";

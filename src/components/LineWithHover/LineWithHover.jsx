@@ -5,12 +5,11 @@ const LineWithHover = ({ text, wordExplanations }) => {
     const [hoveredWord, setHoveredWord] = useState(null);
     const [explanation, setExplanation] = useState('');
 
-    // Split text into words
     const words = text.split(' ');
 
     const handleMouseEnter = (word) => {
         const explanationObj = wordExplanations.find(
-            (we) => we.word === word.replace(/[.,]/g, '') // remove punctuation for matching
+            (we) => we.word === word.replace(/[.,!?]/g, '')
         );
 
         if (explanationObj) {

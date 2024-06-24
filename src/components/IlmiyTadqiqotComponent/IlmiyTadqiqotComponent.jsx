@@ -1,13 +1,10 @@
 import css from './IlmiyTadqiqotlar.module.css'
 import search from "../../assets/images/search.svg";
-import eyeIcon from '../../assets/images/eye.svg'
-import {Link} from "react-router-dom";
-import SingleTadqiqotData from "./SingleTadqiqotData/SingleTadqiqotData.jsx";
 import {useState} from "react";
 import useFetch from "../../hooks/useFetch.jsx";
 
 const IlmiyTadqiqotlar = () => {
-    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/news')
+    const {data, isLoading, error} = useFetch('https://biryuzikki.uz/api/v1/news')
     if (isLoading) {
         return <div>Loading...</div>;
     }

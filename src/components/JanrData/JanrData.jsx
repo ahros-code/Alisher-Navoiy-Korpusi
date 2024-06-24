@@ -1,15 +1,12 @@
 import css from './JanrData.module.css';
-import { Link, useLocation } from "react-router-dom";
 import {capitalize, Pagination} from "@mui/material";
 import search from '../../assets/images/search.svg';
-import data from '../JANRLAR_MOCK_DATA/data.js';
 import { useContext, useEffect, useState } from "react";
 import { JanrContext } from "../../context/JanrContext.jsx";
-import useFetch from "../../hooks/useFetch.jsx";
 import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 
 const JanrData = () => {
-    const { selectedGenre, setSelectedGenre } = useContext(JanrContext);
+    const { selectedGenre } = useContext(JanrContext);
     const [responseData, setResponseData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -19,7 +16,7 @@ const JanrData = () => {
     const [pagesCount, setPagesCount] = useState(Number);
 
     useEffect(() => {
-        fetchData(); // Initial request
+        fetchData();
     }, [selectedGenre]);
 
     const fetchData = async () => {
@@ -41,10 +38,6 @@ const JanrData = () => {
 
         setIsLoading(false);
     };
-
-    if(responseData.length > 0){
-        setSecondarySelectedGenre(responseData[0])
-    }
 
     // if (isLoading) {
     //     return <div>Loading...</div>;
@@ -103,42 +96,44 @@ const JanrData = () => {
         <div className={css.janrDataWrapper} style={{position: 'relative'}}>
             <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
             <div className={css.navInput}>
-                <img src={search} alt="search icon" />
+                <img src={search} alt="search icon"/>
                 <input
                     type="text"
                     className={css.searchInput}
                     placeholder={"Raqamlar bo‘yicha qidiruv"}
-                    value={searchData}
+                    value={searchData == '0' ? '' : searchData}
                     onChange={handleInputChange}
                 />
             </div>
             <ul className={css.janrDataList}>
-                {
-                    searchData ? (
-                        searchData.length > 0 ? (
-                            searchData.map((item, index) => (
-                                <li className={css.janrDataItem}
-                                    key={index} onClick={() => setSecondarySelectedGenre(item)}>
-                                    <p className={css.janrDataItemNumber}>{item.number}. </p>
-                                    <p className={css.janrDataItemData}>{item.text}</p>
-                                </li>
-                            ))
-                        ) : (
-                            <div>No data available</div>
-                        )
-                    ) : responseData.length > 0 ? (
-                        responseData.map((item, index) => (
-                            <li className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
-                                key={index} onClick={() => setSecondarySelectedGenre(item)}>
-                                <p className={css.janrDataItemNumber}>{item.number}. </p>
-                                <p className={css.janrDataItemData}>{item.text}</p>
-                            </li>
-                        ))
-                    ) : (
-                        <div>No data available</div> && setSecondarySelectedGenre(null)
-                    )
-                }
-
+                {searchData && searchedData && searchedData.length > 0 ? (
+                    // If searchData is not empty and searchedData has items, render searchedData
+                    searchedData?.map((item, index) => (
+                        <li
+                            className={css.janrDataItem}
+                            key={index}
+                            onClick={() => setSecondarySelectedGenre(item)}
+                        >
+                            <p className={css.janrDataItemNumber}>{item.number}. </p>
+                            <p className={css.janrDataItemData}>{item.text}</p>
+                        </li>
+                    ))
+                ) : responseData.length > 0 ? (
+                    // If searchData is empty or searchedData is empty, render responseData
+                    responseData.map((item, index) => (
+                        <li
+                            className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
+                            key={index}
+                            onClick={() => setSecondarySelectedGenre(item)}
+                        >
+                            <p className={css.janrDataItemNumber}>{item.number}. </p>
+                            <p className={css.janrDataItemData}>{item.text}</p>
+                        </li>
+                    ))
+                ) : (
+                    // If responseData is empty, show no data and reset secondarySelectedGenre
+                    <div>No data available</div>
+                )}
             </ul>
             <Pagination
                 count={pagesCount}

@@ -1,7 +1,6 @@
 import css from './DevonlarTarikibiImages.module.css';
 import genreImageWhite from '../../assets/images/genreImage.svg';
 import genreImageBlue from '../../assets/images/genreImageBlue.svg';
-import {useLocation} from "react-router-dom";
 import {useContext} from "react";
 import {JanrContext} from "../../context/JanrContext.jsx";
 

@@ -1,13 +1,12 @@
 import css from './SingleCard.module.css';
-import {Link, useNavigate, useParams} from "react-router-dom";
-import korpus_mock_data from "../../components/Korpus/korpus_mock_data.js";
+import {useNavigate, useParams} from "react-router-dom";
 import arrowLeft from '../../assets/images/arrowLeft.svg'
 import useFetch from "../../hooks/useFetch.jsx";
 
 const SingleCard = () => {
     const {id} = useParams()
     const navigate = useNavigate()
-    const {data} = useFetch(`http://biryuzikki.uz/api/v1/questions/${id}`)
+    const {data} = useFetch(`https://biryuzikki.uz/api/v1/questions/${id}`)
     return (
         <div className={css.singleCardWrapper}>
             <div className={window.innerWidth >= 500 ? css.container : ''}>

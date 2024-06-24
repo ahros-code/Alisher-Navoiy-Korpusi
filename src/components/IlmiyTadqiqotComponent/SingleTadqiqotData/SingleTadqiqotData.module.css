@@ -1,4 +1,8 @@
 .newsDataItem {
     padding: 16px;
-    border-bottom: 1px solid #C7D9E580;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
 }

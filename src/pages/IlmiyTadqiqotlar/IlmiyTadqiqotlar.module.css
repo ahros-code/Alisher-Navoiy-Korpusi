@@ -20,5 +20,7 @@
 }
 
 .newsMainSectionWrapper {
-    padding-bottom: 100px;
+    padding: 24px 24px 100px 24px;
+    border-radius: 16px;
+    background-color: #fff;
 }

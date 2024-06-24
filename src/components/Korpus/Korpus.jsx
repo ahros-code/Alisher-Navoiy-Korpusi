@@ -23,7 +23,7 @@ const Korpus = () => {
         setVisibleCount(showAll ? 3 : korpus_mock_data.length);
     };
 
-    const {data, isLoading, error} = useFetch('http://biryuzikki.uz/api/v1/questions/');
+    const {data, isLoading, error} = useFetch('https://biryuzikki.uz/api/v1/questions/');
     if (isLoading) {
         return <div>Loading...</div>;
     }

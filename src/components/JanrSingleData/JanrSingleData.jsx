@@ -11,7 +11,6 @@ import arrow from '../../assets/images/arrow-narrow-right-icon.svg'
 import LineWithHover from "../LineWithHover/LineWithHover.jsx";
 
 const JanrSingleData = () => {
-    const [hoveredWord, setHoveredWord] = useState(null);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -139,7 +138,7 @@ const JanrSingleData = () => {
         `,
     );
 
-    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
+    const { secondarySelectedGenre } = useContext(SecondaryJanrContext);
     const [isLoading, setIsLoading] = useState(false);
     const [myData, setMyData] = useState(null);
 

@@ -1,9 +1,7 @@
 import css from './DevonCard.module.css';
 import {Link} from "react-router-dom";
-import useFetch from "../../../hooks/useFetch.jsx";
 
 const DevonCard = ({id, image, title, description, onClick}) => {
-    // const devan = useFetch(`https://biryuzikki.uz/api/v1/general/?devan_id=${id}`);
     return (
         <div className={css.devonCardWrapper} onClick={() => onClick(id)} >
             <div className={css.imageWrapper}>
