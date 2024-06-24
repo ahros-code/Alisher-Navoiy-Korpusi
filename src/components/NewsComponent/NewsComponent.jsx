@@ -35,8 +35,6 @@ const NewsComponent = () => {
         setSearchData(event.target.value);
     };
 
-
-
     return (
         <div className={css.wrapper}>
             <form className={css.form}>

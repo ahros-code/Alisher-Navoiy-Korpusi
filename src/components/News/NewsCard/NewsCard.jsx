@@ -4,7 +4,6 @@ import {formatDistanceToNow, parseISO} from "date-fns";
 const NewsCard = ({title, authors, published_at, main_image}) => {
     const parsedDate = parseISO(published_at);
 
-    // Calculate the time difference from now to the parsed date
     const timeAgo = formatDistanceToNow(parsedDate);
   return (
       <div className={css.wrapper}>

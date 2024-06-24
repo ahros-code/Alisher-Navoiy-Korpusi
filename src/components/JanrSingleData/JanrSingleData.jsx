@@ -147,8 +147,7 @@ const JanrSingleData = () => {
             setMyData(null);
             return;
         }
-
-        setIsLoading(true); // Set loading state to true on data fetch start
+        setIsLoading(true);
         fetch(`https://biryuzikki.uz/api/v1/genres/${secondarySelectedGenre.id}`)
             .then(response => response.json())
             .then(data => {

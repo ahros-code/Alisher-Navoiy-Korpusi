@@ -55,7 +55,7 @@ const NavbarComponent = () => {
                         </ListItem>
                         <ListItem>
                             <Link to={'/asarlar'} onClick={handleClose}
-                                className={location.pathname === '/asarlar' ? css.activeDrawerItem : css.notActiveDrawerItem}>
+                                className={location.pathname === '/works' ? css.activeDrawerItem : css.notActiveDrawerItem}>
                                 <img src={tarjimaiHol} alt={"sasa"}/>
                                 <div className={css.drawerItemText}>Asarlar</div>
                             </Link>
@@ -95,11 +95,11 @@ const NavbarComponent = () => {
                         <li className={css.item}><Link to="/devonlar"
                                                        className={location.pathname === '/devonlar' ? css.activeLink : ''}>Devonlari</Link>
                         </li>
-                        <li className={css.item}><Link to="/asarlar"
-                                                       className={location.pathname === '/asarlar' ? css.activeLink : ''}>Asarlari</Link>
+                        <li className={css.item}><Link to="/works"
+                                                       className={location.pathname === '/works' ? css.activeLink : ''}>Asarlari</Link>
                         </li>
-                        <li className={css.item}><Link to="/ilmiy-tadqiqotlar"
-                                                       className={location.pathname === '/ilmiy-tadqiqotlar' ? css.activeLink : ''}>Ilmiy
+                        <li className={css.item}><Link to="/researches"
+                                                       className={location.pathname === '/researches' ? css.activeLink : ''}>Ilmiy
                             tadqiqotlar</Link></li>
                         <li className={css.item}><Link to="/news"
                                                        className={location.pathname === '/news' ? css.activeLink : ''}>Yangiliklar</Link>
