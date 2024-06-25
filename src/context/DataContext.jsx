@@ -7,7 +7,7 @@ export const DataProvider = ({ children }) => {
     const [isCardLoading, setIsCardLoading] = useState(false);
 
     const handleCardClick = (id) => {
-        setIsCardLoading(true);  // Set loading state to true
+        setIsCardLoading(true);
         fetch(`https://biryuzikki.uz/api/v1/general/?devan_id=${id}`, {
             method: 'GET',
             headers: {

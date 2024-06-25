@@ -1,9 +1,10 @@
 import css from './JanrData.module.css';
-import { capitalize, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import search from '../../assets/images/search.svg';
 import { useContext, useEffect, useState } from "react";
 import { JanrContext } from "../../context/JanrContext.jsx";
 import { SecondaryJanrContext } from "../../context/SecondaryJanrContext.jsx";
+import {SearchContext} from "../../context/SearchContext.jsx";
 
 const JanrData = () => {
     const { selectedGenre } = useContext(JanrContext);
@@ -15,6 +16,7 @@ const JanrData = () => {
     const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
     const [pagesCount, setPagesCount] = useState(0);
     const [page, setPage] = useState(1);
+    const {searchResults, generalSearch} = useContext(SearchContext);
 
     useEffect(() => {
         fetchData();
@@ -80,6 +82,14 @@ const JanrData = () => {
             setSecondarySelectedGenre(null)
         }
     }, [responseData]);
+
+    useEffect(() => {
+        if(generalSearch){
+            setResponseData(searchResults)
+        } else {
+            fetchData();
+        }
+    }, [generalSearch]);
 
     if (error) {
         return <div>Error: {error.message}</div>;
