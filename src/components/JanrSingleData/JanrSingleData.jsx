@@ -203,10 +203,10 @@ const JanrSingleData = () => {
                         >
                             <Fade in={open}>
                                 <ModalContent sx={style} style={{
-                                    maxWidth: '871px',
+                                    maxWidth: '512px',
                                     width: '100%',
                                     overflowY: 'auto',
-                                    maxHeight: '80vh'
+                                    maxHeight: '660px'
                                 }}>
                                     <h3 className={styles.title}>Metama’lumot</h3>
                                     <ul className={styles.list}></ul>

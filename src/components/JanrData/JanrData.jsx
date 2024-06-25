@@ -87,9 +87,9 @@ const JanrData = () => {
         if(generalSearch){
             setResponseData(searchResults)
         } else {
-            fetchData();
+            fetchData()
         }
-    }, [generalSearch]);
+    }, [searchResults]);
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -107,6 +107,7 @@ const JanrData = () => {
                     value={searchData == '0' ? '' : searchData}
                     onChange={handleInputChange}
                 />
+
             </div>
             <ul className={css.janrDataList}>
                 {searchData && searchedData && searchedData.length > 0 ? (

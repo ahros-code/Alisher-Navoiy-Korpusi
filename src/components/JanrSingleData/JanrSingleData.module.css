@@ -31,25 +31,27 @@
 
 .list {
     max-width: 871px;
-    padding: 40px 32px;
+    padding: 24px;
 }
 
 .item {
     display: flex;
-    /*justify-content: space-between;*/
-    padding-top: 16px;
-    padding-bottom: 16px;
+    justify-content: space-between;
+    /*padding-top: 4px;*/
+    padding-bottom: 4px;
     border-bottom: 1px solid #E1EAF0;
     color: #111111;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    /*font-size: 16px;*/
+    /*line-height: 20px;*/
+    font-size: .875rem;
+    line-height: 1.25rem;
 }
 
 .left {
-    max-width: 250px;
+    max-width: 227px;
     width: 100%;
-    margin-right: 300px;
+    text-align: left;
 }
 
 .title {
@@ -81,4 +83,8 @@
 .botBtns {
     border: none;
     background-color: transparent;
+}
+
+.right {
+    text-align: end;
 }
