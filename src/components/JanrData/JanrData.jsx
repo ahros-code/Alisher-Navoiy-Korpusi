@@ -4,22 +4,29 @@ import search from '../../assets/images/search.svg';
 import { useContext, useEffect, useState } from "react";
 import { JanrContext } from "../../context/JanrContext.jsx";
 import { SecondaryJanrContext } from "../../context/SecondaryJanrContext.jsx";
-import {SearchContext} from "../../context/SearchContext.jsx";
+import { SearchContext } from "../../context/SearchContext.jsx";
 
 const JanrData = () => {
     const { selectedGenre } = useContext(JanrContext);
+    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
+    const { searchResults, generalSearch } = useContext(SearchContext);
+
     const [responseData, setResponseData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchData, setSearchData] = useState(0);
     const [searchedData, setSearchedData] = useState([]);
-    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
     const [pagesCount, setPagesCount] = useState(0);
     const [page, setPage] = useState(1);
-    const {searchResults, generalSearch} = useContext(SearchContext);
+    const [selectedValue, setSelectedValue] = useState('');
+    const [secondSelectedValue, setSecondSelectedValue] = useState('');
+    const [filterResults, setFilterResults] = useState({ text_types: [], auditory_ages: [] });
+    const [loadingFilters, setLoadingFilters] = useState(false);
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     useEffect(() => {
         fetchData();
+        fetchFilters();
     }, [selectedGenre]);
 
     const fetchData = async () => {
@@ -38,6 +45,21 @@ const JanrData = () => {
         }
 
         setIsLoading(false);
+    };
+
+    const fetchFilters = async () => {
+        setLoadingFilters(true);
+
+        try {
+            const response = await fetch('https://biryuzikki.uz/api/v1/general/filters/');
+            const data = await response.json();
+            setFilterResults(data);
+        } catch (err) {
+            console.error(`Error while fetching filters: ${err}`);
+            setError(err);
+        }
+
+        setLoadingFilters(false);
     };
 
     const handleInputChange = (event) => {
@@ -78,16 +100,16 @@ const JanrData = () => {
     useEffect(() => {
         if (responseData.length > 0) {
             setSecondarySelectedGenre(responseData[0]);
-        } else if(responseData.length <= 0){
-            setSecondarySelectedGenre(null)
+        } else {
+            setSecondarySelectedGenre(null);
         }
     }, [responseData]);
 
     useEffect(() => {
-        if(generalSearch){
-            setResponseData(searchResults)
+        if (generalSearch) {
+            setResponseData(searchResults);
         } else {
-            fetchData()
+            fetchData();
         }
     }, [searchResults]);
 
@@ -95,19 +117,57 @@ const JanrData = () => {
         return <div>Error: {error.message}</div>;
     }
 
+    const handleSelectChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+    const handleSecondSelectChange = (event) => {
+        setSecondSelectedValue(event.target.value);
+    };
+
     return (
         <div className={css.janrDataWrapper} style={{ position: 'relative' }}>
             <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
             <div className={css.navInput}>
-                <img src={search} alt="search icon" />
+                <img src={search} alt="search icon"/>
                 <input
                     type="text"
                     className={css.searchInput}
-                    placeholder={"Raqamlar bo‘yicha qidiruv"}
-                    value={searchData == '0' ? '' : searchData}
+                    placeholder="Raqamlar bo‘yicha qidiruv"
+                    value={searchData === 0 ? '' : searchData}
                     onChange={handleInputChange}
                 />
-
+                <div className={css.selects}>
+                    <select
+                        value={selectedValue}
+                        onChange={handleSelectChange}
+                        className={css.select}
+                    >
+                        <option value="">Matn tipi</option>
+                        {!loadingFilters ? (
+                            filterResults?.text_types.map(item => (
+                                <>
+                                    <option key={item.id} value={item.name}>{item.name}</option></>
+                            ))
+                        ) : (
+                            <option disabled>Loading...</option>
+                        )}
+                    </select>
+                    <select
+                        value={secondSelectedValue}
+                        onChange={handleSecondSelectChange}
+                        className={css.select}
+                    >
+                        <option value="">Yosh bo'yicha</option>
+                        {!loadingFilters ? (
+                            filterResults?.auditory_ages.map(item => (
+                                <option key={item.id} value={item.auditory_age}>{item.auditory_age}</option>
+                            ))
+                        ) : (
+                            <option disabled>Loading...</option>
+                        )}
+                    </select>
+                </div>
             </div>
             <ul className={css.janrDataList}>
                 {searchData && searchedData && searchedData.length > 0 ? (
