@@ -7,16 +7,19 @@ import {DataProvider} from "./context/DataContext.jsx";
 import {JanrContextProvider} from "./context/JanrContext.jsx";
 import {SecondaryJanrContextProvider} from "./context/SecondaryJanrContext.jsx";
 import {SearchContextProvider} from "./context/SearchContext.jsx";
+import {SecondaryDataProvider} from "./context/SecondaryDataContext.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <SearchContextProvider>
             <DataProvider>
-                <JanrContextProvider>
-                    <SecondaryJanrContextProvider>
-                        <App/>
-                    </SecondaryJanrContextProvider>
-                </JanrContextProvider>
+                <SecondaryDataProvider>
+                    <JanrContextProvider>
+                        <SecondaryJanrContextProvider>
+                            <App/>
+                        </SecondaryJanrContextProvider>
+                    </JanrContextProvider>
+                </SecondaryDataProvider>
             </DataProvider>
         </SearchContextProvider>
     </BrowserRouter>

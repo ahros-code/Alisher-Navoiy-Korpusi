@@ -5,6 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import {JanrContext} from "../../context/JanrContext.jsx";
 import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 import {SearchContext} from "../../context/SearchContext.jsx";
+import {SecondaryContext} from "../../context/SecondaryDataContext.jsx";
 
 const JanrData = () => {
     const {selectedGenre} = useContext(JanrContext);
@@ -24,6 +25,8 @@ const JanrData = () => {
     const [loadingFilters, setLoadingFilters] = useState(false);
     const [selectedTextType, setSelectedTextType] = useState('');
     const [selectedAuditoryAge, setSelectedAuditoryAge] = useState('');
+    const {secondaryData, setSecondaryData} = useContext(SecondaryContext);
+    const [secondaryFetchedData, setSecondaryFetchedData] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -48,6 +51,17 @@ const JanrData = () => {
         setIsLoading(false);
     };
 
+    const fetchSecondaryData = async () => {
+        setIsLoading(true);
+        try{
+            const response = await fetch(`https://biryuzikki.uz/api/v1/general/?second=${secondaryData.id}`);
+            const data = await response.json()
+            setSecondaryFetchedData(data.main.results);
+        } catch (err) {
+            setError(err)
+        }
+    }
+
     const fetchFilters = async () => {
         setLoadingFilters(true);
 
@@ -66,19 +80,6 @@ const JanrData = () => {
     const handleInputChange = (event) => {
         setSearchData(event.target.value);
     };
-
-    useEffect(() => {
-        if (searchData) {
-            fetch(`https://biryuzikki.uz/api/v1/general?genre_detail_number=${searchData}`)
-                .then(res => res.json())
-                .then(response => {
-                    setSearchedData(response.main.results);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    }, [searchData]);
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -113,6 +114,23 @@ const JanrData = () => {
             console.error(`Error fetching data: `, err)
         })
     }
+
+    useEffect(() => {
+        fetchSecondaryData()
+    }, [secondaryData]);
+
+    useEffect(() => {
+        if (searchData) {
+            fetch(`https://biryuzikki.uz/api/v1/general?genre_detail_number=${searchData}`)
+                .then(res => res.json())
+                .then(response => {
+                    setSearchedData(response.main.results);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    }, [searchData]);
 
     useEffect(() => {
         fetchDataByAuditoryAge()
@@ -217,7 +235,7 @@ const JanrData = () => {
                             <p className={css.janrDataItemData}>{item.text}</p>
                         </li>
                     ))
-                ) : responseData.length > 0 ? (
+                ) : secondaryFetchedData.length < 0 ? responseData.length > 0 ? (
                     responseData.map((item, index) => (
                         <li
                             className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
@@ -230,7 +248,16 @@ const JanrData = () => {
                     ))
                 ) : (
                     <div>No data available</div>
-                )}
+                ) : secondaryFetchedData.map((item, index) => (
+                    <li
+                        className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
+                        key={index}
+                        onClick={() => setSecondarySelectedGenre(item)}
+                    >
+                        {item.number !== "" ? <p className={css.janrDataItemNumber}>{item.number}. </p> : <></>}
+                        <p className={css.janrDataItemData}>{item.text}</p>
+                    </li>
+                ))}
             </ul>
             <Pagination
                 count={pagesCount}
