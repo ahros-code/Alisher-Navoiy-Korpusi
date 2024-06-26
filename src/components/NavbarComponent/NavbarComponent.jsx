@@ -2,7 +2,7 @@ import css from './NavbarComponent.module.css'
 import navLogo from '../../assets/images/navLogo.svg'
 import search from '../../assets/images/search.svg'
 import flag from '../../assets/images/flag.svg'
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Hamburger from 'hamburger-react'
 import {useContext, useState} from "react";
 import {Drawer, List, ListItem, ListItemText} from "@mui/material";
@@ -16,6 +16,7 @@ const NavbarComponent = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const {performSearch} = useContext(SearchContext);
     const [searchValue, setSearchValue] = useState('');
+    const navigate = useNavigate();
 
     const handleClose = () => {
         setOpen(false)
@@ -24,9 +25,15 @@ const NavbarComponent = () => {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            performSearch(searchValue);
+            if (location.pathname !== '/devonlar') {
+                navigate("/devonlar")
+                performSearch(searchValue)
+            } else {
+                performSearch(searchValue);
+            }
         }
     };
+
 
     const toggleDrawer = (newOpen) => () => {
         setOpenDrawer(newOpen);
@@ -94,7 +101,7 @@ const NavbarComponent = () => {
                 </div>
                 <div className={css.navInput}>
                     <img src={search} alt="search icon"/>
-                    <input type="text" className={css.searchInput} placeholder={'Qidiruv'} value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyDown={handleKeyPress} />
+                    <input type="text" className={css.searchInput} placeholder={'Qidiruv'} value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyPress={handleKeyPress} />
                 </div>
                 <div className={css.navbarItemsList}>
                     <ul className={css.itemsList}>

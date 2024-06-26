@@ -1,15 +1,15 @@
 import css from './JanrData.module.css';
-import { Pagination } from "@mui/material";
+import {Pagination} from "@mui/material";
 import search from '../../assets/images/search.svg';
-import { useContext, useEffect, useState } from "react";
-import { JanrContext } from "../../context/JanrContext.jsx";
-import { SecondaryJanrContext } from "../../context/SecondaryJanrContext.jsx";
-import { SearchContext } from "../../context/SearchContext.jsx";
+import {useContext, useEffect, useState} from "react";
+import {JanrContext} from "../../context/JanrContext.jsx";
+import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
+import {SearchContext} from "../../context/SearchContext.jsx";
 
 const JanrData = () => {
-    const { selectedGenre } = useContext(JanrContext);
-    const { secondarySelectedGenre, setSecondarySelectedGenre } = useContext(SecondaryJanrContext);
-    const { searchResults, generalSearch } = useContext(SearchContext);
+    const {selectedGenre} = useContext(JanrContext);
+    const {secondarySelectedGenre, setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
+    const {searchResults, generalSearch} = useContext(SearchContext);
 
     const [responseData, setResponseData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -20,9 +20,10 @@ const JanrData = () => {
     const [page, setPage] = useState(1);
     const [selectedValue, setSelectedValue] = useState('');
     const [secondSelectedValue, setSecondSelectedValue] = useState('');
-    const [filterResults, setFilterResults] = useState({ text_types: [], auditory_ages: [] });
+    const [filterResults, setFilterResults] = useState({text_types: [], auditory_ages: []});
     const [loadingFilters, setLoadingFilters] = useState(false);
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [selectedTextType, setSelectedTextType] = useState('');
+    const [selectedAuditoryAge, setSelectedAuditoryAge] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -93,9 +94,33 @@ const JanrData = () => {
                 setResponseData(data.main.results);
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data: ', error);
             });
     };
+
+    const fetchDataByTextType = () => {
+        fetch(selectedAuditoryAge !== '' && selectedAuditoryAge !== `Yosh bo'yicha` ? `https://biryuzikki.uz/api/v1/general?text_type_id__in=${selectedTextType}&auditory_age__in=${selectedAuditoryAge}` : `https://biryuzikki.uz/api/v1/general?text_type_id__in=${selectedTextType}`).then(res => res.json()).then(data => {
+            setResponseData(data.main.results);
+        }).catch(err => {
+            console.error(`Error fetching data: `, err)
+        })
+    }
+
+    const fetchDataByAuditoryAge = () => {
+        fetch(selectedTextType !== '' && selectedTextType !== 'Matn tipi' ? `https://biryuzikki.uz/api/v1/general?auditory_age__in=${selectedAuditoryAge}&text_type_id__in=${selectedTextType}` : `https://biryuzikki.uz/api/v1/general?auditory_age__in=${selectedAuditoryAge}`).then(res => res.json()).then(data => {
+            setResponseData(data.main.results);
+        }).catch(err => {
+            console.error(`Error fetching data: `, err)
+        })
+    }
+
+    useEffect(() => {
+        fetchDataByAuditoryAge()
+    }, [selectedAuditoryAge])
+
+    useEffect(() => {
+        fetchDataByTextType()
+    }, [selectedTextType])
 
     useEffect(() => {
         if (responseData.length > 0) {
@@ -117,16 +142,28 @@ const JanrData = () => {
         return <div>Error: {error.message}</div>;
     }
 
-    const handleSelectChange = (event) => {
-        setSelectedValue(event.target.value);
+    const handleTextTypeSelect = (event) => {
+        const selectedId = event.target.value;
+        if(selectedId !== ''){
+            setSelectedTextType(selectedId);
+        } else if(selectedId === ''){
+            setSelectedTextType('')
+            fetchData()
+        }
     };
 
     const handleSecondSelectChange = (event) => {
-        setSecondSelectedValue(event.target.value);
+        const selectedId = event.target.value;
+        if(selectedId !== ''){
+            setSelectedAuditoryAge(selectedId);
+        } else if(selectedId === ''){
+            setSelectedAuditoryAge(``)
+            fetchData()
+        }
     };
 
     return (
-        <div className={css.janrDataWrapper} style={{ position: 'relative' }}>
+        <div className={css.janrDataWrapper} style={{position: 'relative'}}>
             <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
             <div className={css.navInput}>
                 <img src={search} alt="search icon"/>
@@ -139,22 +176,21 @@ const JanrData = () => {
                 />
                 <div className={css.selects}>
                     <select
-                        value={selectedValue}
-                        onChange={handleSelectChange}
+                        value={selectedTextType}
+                        onChange={handleTextTypeSelect}
                         className={css.select}
                     >
                         <option value="">Matn tipi</option>
                         {!loadingFilters ? (
                             filterResults?.text_types.map(item => (
-                                <>
-                                    <option key={item.id} value={item.name}>{item.name}</option></>
+                                <option key={item.id} value={item.id}>{item.name}</option>
                             ))
                         ) : (
                             <option disabled>Loading...</option>
                         )}
                     </select>
                     <select
-                        value={secondSelectedValue}
+                        value={selectedAuditoryAge}
                         onChange={handleSecondSelectChange}
                         className={css.select}
                     >
