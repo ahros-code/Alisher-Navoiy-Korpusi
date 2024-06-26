@@ -1,7 +1,7 @@
 import css from './Janrlar.module.css';
 import janrNameIcon from '../../assets/images/tarjimaiHol.svg'
 import useFetch from "../../hooks/useFetch.jsx";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {JanrContext} from "../../context/JanrContext.jsx";
 import {SecondaryContext} from "../../context/SecondaryDataContext.jsx";
 

@@ -8,6 +8,7 @@ import {JanrContextProvider} from "./context/JanrContext.jsx";
 import {SecondaryJanrContextProvider} from "./context/SecondaryJanrContext.jsx";
 import {SearchContextProvider} from "./context/SearchContext.jsx";
 import {SecondaryDataProvider} from "./context/SecondaryDataContext.jsx";
+import {BaytContextProvider} from "./context/BaytContext.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -15,9 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <DataProvider>
                 <SecondaryDataProvider>
                     <JanrContextProvider>
-                        <SecondaryJanrContextProvider>
-                            <App/>
-                        </SecondaryJanrContextProvider>
+                        <BaytContextProvider>
+                            <SecondaryJanrContextProvider>
+                                <App/>
+                            </SecondaryJanrContextProvider>
+                        </BaytContextProvider>
                     </JanrContextProvider>
                 </SecondaryDataProvider>
             </DataProvider>

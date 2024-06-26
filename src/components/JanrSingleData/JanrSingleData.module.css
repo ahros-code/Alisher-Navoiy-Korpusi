@@ -37,13 +37,11 @@
 .item {
     display: flex;
     justify-content: space-between;
-    /*padding-top: 4px;*/
     padding-bottom: 4px;
     border-bottom: 1px solid #E1EAF0;
     color: #111111;
     font-weight: 500;
     /*font-size: 16px;*/
-    /*line-height: 20px;*/
     font-size: .875rem;
     line-height: 1.25rem;
 }

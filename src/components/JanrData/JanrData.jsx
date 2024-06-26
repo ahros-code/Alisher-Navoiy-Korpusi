@@ -6,6 +6,7 @@ import {JanrContext} from "../../context/JanrContext.jsx";
 import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 import {SearchContext} from "../../context/SearchContext.jsx";
 import {SecondaryContext} from "../../context/SecondaryDataContext.jsx";
+import {BaytContext} from "../../context/BaytContext.jsx";
 
 const JanrData = () => {
     const {selectedGenre} = useContext(JanrContext);
@@ -27,6 +28,7 @@ const JanrData = () => {
     const [selectedAuditoryAge, setSelectedAuditoryAge] = useState('');
     const {secondaryData, setSecondaryData} = useContext(SecondaryContext);
     const [secondaryFetchedData, setSecondaryFetchedData] = useState([]);
+    const {selectedBayt, setSelectedBayt} = useContext(BaytContext)
 
     useEffect(() => {
         fetchData();
@@ -53,7 +55,7 @@ const JanrData = () => {
 
     const fetchSecondaryData = async () => {
         setIsLoading(true);
-        try{
+        try {
             const response = await fetch(`https://biryuzikki.uz/api/v1/general/?second=${secondaryData.id}`);
             const data = await response.json()
             setSecondaryFetchedData(data.main.results);
@@ -160,11 +162,15 @@ const JanrData = () => {
         return <div>Error: {error.message}</div>;
     }
 
+    if (secondaryFetchedData[0]?.number === "") {
+        setSecondarySelectedGenre(null)
+    }
+
     const handleTextTypeSelect = (event) => {
         const selectedId = event.target.value;
-        if(selectedId !== ''){
+        if (selectedId !== '') {
             setSelectedTextType(selectedId);
-        } else if(selectedId === ''){
+        } else if (selectedId === '') {
             setSelectedTextType('')
             fetchData()
         }
@@ -172,9 +178,9 @@ const JanrData = () => {
 
     const handleSecondSelectChange = (event) => {
         const selectedId = event.target.value;
-        if(selectedId !== ''){
+        if (selectedId !== '') {
             setSelectedAuditoryAge(selectedId);
-        } else if(selectedId === ''){
+        } else if (selectedId === '') {
             setSelectedAuditoryAge(``)
             fetchData()
         }
@@ -182,7 +188,7 @@ const JanrData = () => {
 
     return (
         <div className={css.janrDataWrapper} style={{position: 'relative'}}>
-            <h3 className={css.janrDataTitle}>{selectedGenre.name}</h3>
+            <h3 className={css.janrDataTitle}>{secondaryData ? secondaryData.name : selectedGenre.name}</h3>
             <div className={css.navInput}>
                 <img src={search} alt="search icon"/>
                 <input
@@ -249,14 +255,27 @@ const JanrData = () => {
                 ) : (
                     <div>No data available</div>
                 ) : secondaryFetchedData.map((item, index) => (
-                    <li
-                        className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
-                        key={index}
-                        onClick={() => setSecondarySelectedGenre(item)}
-                    >
-                        {item.number !== "" ? <p className={css.janrDataItemNumber}>{item.number}. </p> : <></>}
-                        <p className={css.janrDataItemData}>{item.text}</p>
-                    </li>
+                    <div onClick={() => setSelectedBayt(item)}>
+                        <li
+                            className={`${css.janrDataItem} ${secondarySelectedGenre?.id === item.id ? css.active : ''}`}
+                            key={index}
+                            onClick={() => item.number !== "" ? setSecondarySelectedGenre(item) : ""}
+                        >
+
+                            {item.number !== "" ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : <></>}
+                            <div style={{width: '100%'}}>
+                                <p className={css.janrDataItemData2}>{item.text}</p>
+                                <p style={!item.byte ? {
+                                    display: 'none'
+                                } : {
+                                    textAlign: 'right',
+                                    color: 'rgb(156 163 175)',
+                                    fontSize: '.875rem',
+                                    lineHeight: '1.25rem'
+                                }}>({item.number} - {item.genre_name}, {item.byte} - bayt)</p>
+                            </div>
+                        </li>
+                    </div>
                 ))}
             </ul>
             <Pagination

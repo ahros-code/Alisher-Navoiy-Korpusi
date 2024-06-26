@@ -1,9 +1,11 @@
 import css from './LineWithHover.module.css';
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {BaytContext} from "../../context/BaytContext.jsx";
 
 const LineWithHover = ({ text, wordExplanations }) => {
     const [hoveredWord, setHoveredWord] = useState(null);
     const [explanation, setExplanation] = useState('');
+    const {selectedByte} = useContext(BaytContext);
 
     const words = text.split(' ');
 
