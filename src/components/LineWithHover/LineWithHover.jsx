@@ -2,10 +2,10 @@ import css from './LineWithHover.module.css';
 import {useContext, useState} from "react";
 import {BaytContext} from "../../context/BaytContext.jsx";
 
-const LineWithHover = ({ text, wordExplanations }) => {
+const LineWithHover = ({ text, wordExplanations, lineId }) => {
     const [hoveredWord, setHoveredWord] = useState(null);
     const [explanation, setExplanation] = useState('');
-    const {selectedByte} = useContext(BaytContext);
+    const {selectedBayt} = useContext(BaytContext);
 
     const words = text.split(' ');
 
@@ -30,6 +30,7 @@ const LineWithHover = ({ text, wordExplanations }) => {
 
     return (
         <p>
+            <span style={selectedBayt.byte * 2 == lineId + 1 || selectedBayt.byte * 2 == lineId + 2 ? {backgroundColor: '#FEF08A', borderRadius: '9999px', padding: '7px'} : {}}>
             {words.map((word, index) => (
                 <span
                     key={index}
@@ -50,6 +51,7 @@ const LineWithHover = ({ text, wordExplanations }) => {
                     )}
         </span>
             ))}
+            </span>
         </p>
     );
 };

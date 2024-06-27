@@ -95,6 +95,7 @@ const JanrData = () => {
             .then(response => response.json())
             .then(data => {
                 setResponseData(data.main.results);
+                setSecondaryFetchedData(data.main.results)
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
@@ -262,7 +263,7 @@ const JanrData = () => {
                             onClick={() => item.number !== "" ? setSecondarySelectedGenre(item) : ""}
                         >
 
-                            {item.number !== "" ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : <></>}
+                            {item.byte ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : item.number === "" ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : <p className={css.janrDataItemNumber}>{item.number}. </p>}
                             <div style={{width: '100%'}}>
                                 <p className={css.janrDataItemData2}>{item.text}</p>
                                 <p style={!item.byte ? {

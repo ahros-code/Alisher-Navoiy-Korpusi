@@ -23,6 +23,7 @@
     font-size: 16px;
     line-height: 40px;
     margin-bottom: 28px;
+    text-align: center;
 }
 
 .batafsilBtn {
@@ -41,7 +42,6 @@
     border-bottom: 1px solid #E1EAF0;
     color: #111111;
     font-weight: 500;
-    /*font-size: 16px;*/
     font-size: .875rem;
     line-height: 1.25rem;
 }

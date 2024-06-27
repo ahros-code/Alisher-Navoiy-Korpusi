@@ -172,7 +172,7 @@ const JanrSingleData = () => {
                 {`${myData.genre_detail_number} - ${myData.genre_name}`}
             </h3>
             <p className={styles.janrSingleDataText}>
-                {!isLoading ? myData.lines.map((line) => {
+                {!isLoading ? myData.lines.map((line, index) => {
                     const wordExplanationsForLine = myData.word_explanations.filter(
                         (we) => we.genre_detail_line.includes(line.id))
                     return (
@@ -180,6 +180,7 @@ const JanrSingleData = () => {
                             key={line.id}
                             text={line.text}
                             wordExplanations={wordExplanationsForLine}
+                            lineId={index}
                         />
                     )
                 }) : <>Loading...</>}
