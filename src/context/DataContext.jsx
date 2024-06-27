@@ -14,7 +14,7 @@ export const DataProvider = ({ children }) => {
                 setMoyData(data)
             })
         } catch (err){
-            console.error(`Error while fetching data: ${err}`)
+            console.error(`Error while fetching data: ${err}`);
         }
     })();
 

@@ -52,6 +52,7 @@ const JanrData = () => {
         setIsLoading(false);
     };
 
+
     const fetchSecondaryData = async () => {
         setIsLoading(true);
         try {
@@ -104,6 +105,7 @@ const JanrData = () => {
     const fetchDataByTextType = () => {
         fetch(selectedAuditoryAge !== '' && selectedAuditoryAge !== `Yosh bo'yicha` ? `https://biryuzikki.uz/api/v1/general?text_type_id__in=${selectedTextType}&auditory_age__in=${selectedAuditoryAge}` : `https://biryuzikki.uz/api/v1/general?text_type_id__in=${selectedTextType}`).then(res => res.json()).then(data => {
             setResponseData(data.main.results);
+            setSecondaryFetchedData(data.main.results)
         }).catch(err => {
             console.error(`Error fetching data: `, err)
         })
@@ -112,6 +114,7 @@ const JanrData = () => {
     const fetchDataByAuditoryAge = () => {
         fetch(selectedTextType !== '' && selectedTextType !== 'Matn tipi' ? `https://biryuzikki.uz/api/v1/general?auditory_age__in=${selectedAuditoryAge}&text_type_id__in=${selectedTextType}` : `https://biryuzikki.uz/api/v1/general?auditory_age__in=${selectedAuditoryAge}`).then(res => res.json()).then(data => {
             setResponseData(data.main.results);
+            setSecondaryFetchedData(data.main.results)
         }).catch(err => {
             console.error(`Error fetching data: `, err)
         })
@@ -188,7 +191,7 @@ const JanrData = () => {
 
     return (
         <div className={css.janrDataWrapper} style={{position: 'relative'}}>
-            <h3 className={css.janrDataTitle}>{secondaryData !== "main" ? secondaryData.name : selectedGenre.name}</h3>
+            <h3 className={css.janrDataTitle}>{secondaryData ? secondaryData !== "main" ? secondaryData.name : selectedGenre.name : ""}</h3>
             <div className={css.navInput}>
                 <img src={search} alt="search icon"/>
                 <input
