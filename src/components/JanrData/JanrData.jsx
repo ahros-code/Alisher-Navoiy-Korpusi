@@ -49,7 +49,6 @@ const JanrData = () => {
         } catch (error) {
             setError(error);
         }
-
         setIsLoading(false);
     };
 
@@ -189,7 +188,7 @@ const JanrData = () => {
 
     return (
         <div className={css.janrDataWrapper} style={{position: 'relative'}}>
-            <h3 className={css.janrDataTitle}>{secondaryData ? secondaryData.name : selectedGenre.name}</h3>
+            <h3 className={css.janrDataTitle}>{secondaryData !== "main" ? secondaryData.name : selectedGenre.name}</h3>
             <div className={css.navInput}>
                 <img src={search} alt="search icon"/>
                 <input

@@ -5,9 +5,22 @@ export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
     const [selectedCardData, setSelectedCardData] = useState(null);
     const [isCardLoading, setIsCardLoading] = useState(false);
+    const [moyData, setMoyData] = useState([])
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    (function fetchDa (){
+        try{
+            fetch('https://biryuzikki.uz/api/v1/general').then(res => res.json()).then(data => {
+                setMoyData(data)
+            })
+        } catch (err){
+            console.error(`Error while fetching data: ${err}`)
+        }
+    })();
 
     const handleCardClick = (id) => {
         setIsCardLoading(true);
+        setSelectedCard(id);
         fetch(`https://biryuzikki.uz/api/v1/general/?devan_id=${id}`, {
             method: 'GET',
             headers: {
@@ -26,7 +39,7 @@ export const DataProvider = ({ children }) => {
     };
 
     return (
-        <DataContext.Provider value={{ selectedCardData, isCardLoading, handleCardClick }}>
+        <DataContext.Provider value={{ selectedCardData, isCardLoading, handleCardClick, selectedCard, setSelectedCard, setMoyData, moyData }}>
             {children}
         </DataContext.Provider>
     );

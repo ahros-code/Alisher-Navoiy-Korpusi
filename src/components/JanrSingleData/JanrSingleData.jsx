@@ -14,7 +14,6 @@ const JanrSingleData = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     const Backdrop = forwardRef((props, ref) => {
         const { open, ...other } = props;
         return (
@@ -147,6 +146,7 @@ const JanrSingleData = () => {
             setMyData(null);
             return;
         }
+
         setIsLoading(true);
         fetch(`https://biryuzikki.uz/api/v1/genres/${secondarySelectedGenre.id}`)
             .then(response => response.json())
