@@ -6,7 +6,7 @@ export const DataProvider = ({ children }) => {
     const [selectedCardData, setSelectedCardData] = useState(null);
     const [isCardLoading, setIsCardLoading] = useState(false);
     const [moyData, setMoyData] = useState([])
-    const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedCard, setSelectedCard] = useState('5d6ec30e-0a9a-425e-89ce-041809a7894c');
 
     (function fetchDa (){
         try{
