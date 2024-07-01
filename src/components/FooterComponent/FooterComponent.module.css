@@ -22,7 +22,7 @@
     display: flex;
 }
 
-.footerLogoResponsive{
+.footerLogoResponsive {
     display: none;
 }
 
@@ -30,15 +30,19 @@
     .footerImage {
         display: none;
     }
+
     .footerWrapper {
         grid-template-columns: 1fr 1fr;
     }
+
     .footerLogoResponsive {
         display: block;
     }
+
     .footerMurojaat {
         width: 100%;
     }
+
     .footerWrapper {
         text-align: center;
     }
@@ -51,6 +55,7 @@
         width: 100%;
         justify-content: space-between;
     }
+
     .footerWrapper {
         text-align: left;
     }
@@ -61,10 +66,12 @@
         font-size: 16px;
         line-height: 24px;
     }
+
     .footerListItems {
         font-size: 12px;
         line-height: 24px;
     }
+
     .footerLogoResponsive {
         width: 100px;
         height: 100px;

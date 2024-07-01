@@ -2,10 +2,10 @@ import FooterComponent from "../../components/FooterComponent/FooterComponent.js
 
 const Footer = () => {
   return (
-      <>
-        <FooterComponent />
-      </>
-  )
-}
+    <>
+      <FooterComponent />
+    </>
+  );
+};
 
 export default Footer;

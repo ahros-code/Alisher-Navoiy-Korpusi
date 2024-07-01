@@ -62,16 +62,19 @@
     line-height: 24px;
 }
 
-@media only screen and (max-width: 974px){
+@media only screen and (max-width: 974px) {
     .devonCardWrapper {
         max-width: 200px;
     }
+
     .devonCardTitle {
         margin-bottom: 4px;
     }
+
     .devonCardDescription {
         margin-bottom: 12px;
     }
+
     .devonCardButton {
         padding: 5px 0;
     }
@@ -81,16 +84,19 @@
     .devonCardWrapper {
         max-width: 180px;
     }
+
     .devonCardDescription {
         font-size: 10px;
         line-height: 16px;
         color: #0B4A6F99;
         opacity: 60%;
     }
+
     .devonCardTitle {
         font-size: 14px;
         line-height: 24px;
     }
+
     .devonCardButton {
         padding: 0;
     }
@@ -101,19 +107,23 @@
     .devonCardWrapper {
         max-width: 130px;
     }
+
     .devonCardTextSection {
         padding: 8px;
     }
+
     .devonCardDescription {
         font-size: 10px;
         line-height: 16px;
         color: #0B4A6F99;
         opacity: 60%;
     }
+
     .devonCardTitle {
         font-size: 14px;
         line-height: 24px;
     }
+
     .devonCardButton {
         padding: 0;
     }

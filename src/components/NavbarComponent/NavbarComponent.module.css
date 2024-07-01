@@ -96,19 +96,21 @@
     display: none;
 }
 
-@media only screen and (max-width: 890px){
+@media only screen and (max-width: 890px) {
     .navWrapper {
         gap: 20px;
     }
 }
 
-@media only screen and (max-width: 812px){
+@media only screen and (max-width: 812px) {
     .navbarItemsList {
         display: none;
     }
+
     .navFlag {
         display: none;
     }
+
     .hamburgerMenu {
         display: block;
     }
@@ -118,6 +120,7 @@
     .navWrapper {
         display: none;
     }
+
     .hamburgerMenu2 {
         display: block;
     }
@@ -154,7 +157,7 @@
     line-height: 24px;
 }
 
-.drawerHead{
+.drawerHead {
     font-size: 16px;
     line-height: 24px;
     color: #1C1C1C;

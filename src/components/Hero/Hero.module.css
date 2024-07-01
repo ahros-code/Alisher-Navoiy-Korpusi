@@ -4,7 +4,7 @@
     right: 0;
 }
 
-@media only screen and (max-width: 1500px){
+@media only screen and (max-width: 1500px) {
     .wrapper {
         bottom: 50px;
         width: 400px;
@@ -12,7 +12,7 @@
     }
 }
 
-@media only screen and (max-width: 1128px){
+@media only screen and (max-width: 1128px) {
     .wrapper {
         width: 300px;
         bottom: 130px;

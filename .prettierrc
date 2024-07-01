@@ -1,0 +1,10 @@
+{
+  "prettier.semi": true,
+  "prettier.useTabs": true,
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
+}

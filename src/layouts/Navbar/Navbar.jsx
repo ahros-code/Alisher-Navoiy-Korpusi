@@ -1,9 +1,7 @@
 import NavbarComponent from "../../components/NavbarComponent/NavbarComponent.jsx";
 
 const Navbar = () => {
-    return (
-        <NavbarComponent />
-    )
-}
+  return <NavbarComponent />;
+};
 
-export default Navbar
+export default Navbar;

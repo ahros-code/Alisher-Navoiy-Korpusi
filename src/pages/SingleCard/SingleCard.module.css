@@ -66,9 +66,11 @@
         font-size: 14px;
         line-height: 24px;
     }
+
     .singleCardTitle {
         display: none;
     }
+
     .secondTitle {
         display: block;
         text-align: center;
@@ -77,19 +79,24 @@
         font-size: 20px;
         line-height: 32px;
     }
+
     .main {
         width: 100%;
     }
+
     .backButton {
         display: none;
     }
+
     .secondBtn {
         border: none;
         background-color: transparent;
     }
+
     .responsiveSection {
         display: flex;
     }
+
     .responsiveSection {
         display: flex;
         align-items: center;
