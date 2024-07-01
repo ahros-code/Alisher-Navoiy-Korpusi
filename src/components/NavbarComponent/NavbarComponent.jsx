@@ -7,7 +7,7 @@ import Hamburger from 'hamburger-react'
 import {useContext, useState} from "react";
 import {Drawer, List, ListItem, ListItemText} from "@mui/material";
 import tarjimaiHol from '../../assets/images/tarjimaiHol.svg'
-import {SearchContext, SearchContextProvider} from "../../context/SearchContext.jsx";
+import {SearchContext} from "../../context/SearchContext.jsx";
 
 
 const NavbarComponent = () => {

@@ -4,7 +4,6 @@ import {DataContext} from "./DataContext.jsx";
 export const JanrContext = createContext();
 
 export const JanrContextProvider = ({children}) => {
-    const {selectedCardData} = useContext(DataContext);
     const [selectedGenre, setSelectedGenre] = useState({
             "id": "4b97b8c5-e382-4917-ad33-7a20b1d82bc6",
         "ordering_number": 1,

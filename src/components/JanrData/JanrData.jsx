@@ -7,11 +7,13 @@ import {SecondaryJanrContext} from "../../context/SecondaryJanrContext.jsx";
 import {SearchContext} from "../../context/SearchContext.jsx";
 import {SecondaryContext} from "../../context/SecondaryDataContext.jsx";
 import {BaytContext} from "../../context/BaytContext.jsx";
+import {DataContext} from "../../context/DataContext.jsx";
 
 const JanrData = () => {
     const {selectedGenre} = useContext(JanrContext);
     const {secondarySelectedGenre, setSecondarySelectedGenre} = useContext(SecondaryJanrContext);
     const {searchResults, generalSearch} = useContext(SearchContext);
+    const {selectedCard} = useContext(DataContext);
 
     const [responseData, setResponseData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -20,15 +22,13 @@ const JanrData = () => {
     const [searchedData, setSearchedData] = useState([]);
     const [pagesCount, setPagesCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [selectedValue, setSelectedValue] = useState('');
-    const [secondSelectedValue, setSecondSelectedValue] = useState('');
     const [filterResults, setFilterResults] = useState({text_types: [], auditory_ages: []});
     const [loadingFilters, setLoadingFilters] = useState(false);
     const [selectedTextType, setSelectedTextType] = useState('');
     const [selectedAuditoryAge, setSelectedAuditoryAge] = useState('');
-    const {secondaryData, setSecondaryData} = useContext(SecondaryContext);
+    const {secondaryData} = useContext(SecondaryContext);
     const [secondaryFetchedData, setSecondaryFetchedData] = useState([]);
-    const {selectedBayt, setSelectedBayt} = useContext(BaytContext)
+    const {setSelectedBayt} = useContext(BaytContext);
 
     useEffect(() => {
         fetchData();
@@ -56,7 +56,7 @@ const JanrData = () => {
     const fetchSecondaryData = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch(`https://biryuzikki.uz/api/v1/general/?second=${secondaryData.id}`);
+            const response = await fetch(`https://biryuzikki.uz/api/v1/general/?second=${secondaryData.id}&devan_id=${selectedCard}`);
             const data = await response.json()
             setSecondaryFetchedData(data.main.results);
         } catch (err) {
@@ -66,7 +66,6 @@ const JanrData = () => {
 
     const fetchFilters = async () => {
         setLoadingFilters(true);
-
         try {
             const response = await fetch('https://biryuzikki.uz/api/v1/general/filters/');
             const data = await response.json();
@@ -75,7 +74,6 @@ const JanrData = () => {
             console.error(`Error while fetching filters: ${err}`);
             setError(err);
         }
-
         setLoadingFilters(false);
     };
 
@@ -265,7 +263,9 @@ const JanrData = () => {
                             onClick={() => item.number !== "" ? setSecondarySelectedGenre(item) : ""}
                         >
 
-                            {item.byte ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : item.number === "" ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : <p className={css.janrDataItemNumber}>{item.number}. </p>}
+                            {item.byte ? <p className={css.janrDataItemNumber}>{index + 1}. </p> : item.number === "" ?
+                                <p className={css.janrDataItemNumber}>{index + 1}. </p> :
+                                <p className={css.janrDataItemNumber}>{item.number}. </p>}
                             <div style={{width: '100%'}}>
                                 <p className={css.janrDataItemData2}>{item.text}</p>
                                 <p style={!item.byte ? {
